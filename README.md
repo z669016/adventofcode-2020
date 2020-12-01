@@ -11,3 +11,7 @@ Also uses the algorithms library, which contains generic classes for addressing 
 
 It was never my intention to create the shortest program possible. I did try to create clear and simple implementations.
 
+##Day 1
+Add all values to a set, and iterate over it. If (2020 - iterated-value) is in the set, then you have found your pair.
+Works similar with three values (double loop).
+ 

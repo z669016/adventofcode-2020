@@ -11,7 +11,12 @@ Also uses the algorithms library, which contains generic classes for addressing 
 
 It was never my intention to create the shortest program possible. I did try to create clear and simple implementations.
 
-##Day 1
+## Day 1
 Add all values to a set, and iterate over it. If (2020 - iterated-value) is in the set, then you have found your pair.
 Works similar with three values (double loop).
- 
+
+## Day 2
+Created a Password class to extract a password from a line of the puzzle input. Created a PasswordPolicy interface to 
+validate password policy and two implementations of that interface with a static factory method. Found the answer by 
+streaming the input, filtering the valid passwords according to the policy, and counting the stream elements.
+  

@@ -19,4 +19,12 @@ Works similar with three values (double loop).
 Created a Password class to extract a password from a line of the puzzle input. Created a PasswordPolicy interface to 
 validate password policy and two implementations of that interface with a static factory method. Found the answer by 
 streaming the input, filtering the valid passwords according to the policy, and counting the stream elements.
-  
+
+## Day 3
+Started with a class called TreeArea, that is build from the map (puzzle input). The TreeArea has a member called 
+'''grid''' that holds the map and can be used to find if there is a tree at a specific location. Replication of the map
+isn't needed, for the map is repetitive so, by using '''x % grid[0].length''' you can get the location of any tree.
+Then I created a Walker class to walk though the forest and count trees given a certain slope.
+This is all you need for part 1. For part 2, just use a list of slopes, map slopes into tree-counts and reduce the 
+stream of long values.
+

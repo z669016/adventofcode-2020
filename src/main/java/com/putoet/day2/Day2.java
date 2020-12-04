@@ -10,7 +10,7 @@ public class Day2 {
         part2();
     }
 
-    public static void part1() {
+    private static void part1() {
         final List<String> policies = ResourceLines.list("/day2.txt");
         System.out.println("passwords valid according to SledRentalPlacePasswordPolicy: " + policies.stream()
                 .filter(policy -> SledRentalPlacePasswordPolicy.of(policy).isValid(Password.password(policy)))
@@ -18,7 +18,7 @@ public class Day2 {
         );
     }
 
-    public static void part2() {
+    private static void part2() {
         final List<String> policies = ResourceLines.list("/day2.txt");
         System.out.println("passwords valid according to TobogganPasswordPolicy: " + policies.stream()
                 .filter(policy -> TobogganPasswordPolicy.of(policy).isValid(Password.password(policy)))

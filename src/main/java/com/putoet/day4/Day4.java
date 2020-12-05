@@ -1,7 +1,7 @@
 package com.putoet.day4;
 
 import com.putoet.resources.ResourceLines;
-import utilities.Validator;
+import com.putoet.utilities.Validator;
 
 import java.util.List;
 

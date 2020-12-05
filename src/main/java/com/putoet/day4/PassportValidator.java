@@ -1,6 +1,6 @@
 package com.putoet.day4;
 
-import utilities.Validator;
+import com.putoet.utilities.Validator;
 
 import java.util.Map;
 import java.util.Set;

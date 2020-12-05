@@ -1,7 +1,7 @@
 package com.putoet.day3;
 
-import utilities.GridUtils;
-import utilities.Point;
+import com.putoet.utilities.GridUtils;
+import com.putoet.utilities.Point;
 
 import java.util.List;
 

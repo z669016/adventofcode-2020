@@ -3,7 +3,7 @@ package com.putoet.day3;
 import com.putoet.resources.ResourceLines;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import utilities.Point;
+import com.putoet.utilities.Point;
 
 import java.util.List;
 

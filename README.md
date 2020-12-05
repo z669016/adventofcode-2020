@@ -32,7 +32,15 @@ stream of long values.
 Created a Passport class with a '''fields()''' method, which returns a map of fields. This allows simple validation of 
 completeness using a set later on. A Batch class translates the puzzle input in a list of passports. 
 A PassportValidator checks for a passport if the key-set of the fields-map contains all required fields 
-(using '''Set.containsall(REQUIRED)'''). That's all required for part 1.
+(using '''Set.containsAll(REQUIRED)'''). That's all required for part 1.
 For part 2, an EnhancedPassportValidator is being used, which contains attribute specific validator methods, also 
 listed in a map (using the attribute name as the key). This validator can loop over all keys i the field-map of a 
 passport and use the appropriate validator-method to check the field-value.
+
+## Day 5
+It was pretty straight forward today. Created a BoardingPassDecoder (decodes the letter code into a Point which 
+references a seat row and column) and a SeatIdDecoder (which decodes a Point into a seat ID). Using these it's simple
+to create a Set<Point> of seats in use. With this you can solve part 1.
+Given the set of used seats you can create a set of empty seats (Set<Point> with X,Y coordinates in the range
+(0..7, 0..127) that are missing in the used seats set). Then browse the unused seats set, filter out all in the first 
+and last row, check is prev and next id are in use, and pick the first available. I love streams...

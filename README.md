@@ -44,3 +44,16 @@ to create a Set<Point> of seats in use. With this you can solve part 1.
 Given the set of used seats you can create a set of empty seats (Set<Point> with X,Y coordinates in the range
 (0..7, 0..127) that are missing in the used seats set). Then browse the unused seats set, filter out all in the first 
 and last row, check is prev and next id are in use, and pick the first available. I love streams...
+
+## Day 6
+I created a '''GroupAnswers''' class to hold the answer lines of each group (just a '''List<String>'''), with a method 
+'''yesCount()''' to count number of the distinct letters in the group (part 1). Parsing the puzzle input is the hardest part 
+in this and even that is straight forward. For part 2 an '''allYesses()''' method was added, that uses a 
+'''Set<Character>''' to determine which letters are in all forms per group. The set size after processing all entries
+of the group is the number of all yesses.
+
+## Day 7
+A '''Bags.loadBags(List<String> lines)''' method returns a '''Map<String,Bag>''' (puzzle input). The '''Bag''' class 
+provides a '''contains(Bag bag)''' method which returns true if a bag (or any of its contained bags)
+contains the specified bag. That's enough to solve part 1. Another method returns the number of bags inside the bag. 
+The result is remembered as it probably takes too long to calculate it every time again. That method solves part 2. 

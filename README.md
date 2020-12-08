@@ -56,4 +56,16 @@ of the group is the number of all yesses.
 A '''Bags.loadBags(List<String> lines)''' method returns a '''Map<String,Bag>''' (puzzle input). The '''Bag''' class 
 provides a '''contains(Bag bag)''' method which returns true if a bag (or any of its contained bags)
 contains the specified bag. That's enough to solve part 1. Another method returns the number of bags inside the bag. 
-The result is remembered as it probably takes too long to calculate it every time again. That method solves part 2. 
+The result is remembered as it probably takes too long to calculate it every time again. That method solves part 2.
+
+## Day 8
+It might be a bit of overkill, but maybe it pays off in one of the upcoming days (over the past years, each year 
+had several puzzles based on the idea of a programmable device. I created some classes for an '''Instruction''' 
+(abstract base class), a '''Compiler''', and a '''Processor''' (an interface with an instruction pointer and an 
+accumulator), and build a '''HandHeldGameConsole'''.
+
+The '''Processor''' can log it's state and executing instructions, and can terminate (configurable) when an instruction
+is about to execute for a second time. These are the required ingredients for part 1.
+
+For part 2, just loop over the program and replace the next nop or jmp instruction, until the program terminates 
+normally instead of being terminated due to an repeated instruction.

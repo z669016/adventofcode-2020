@@ -68,4 +68,16 @@ The '''Processor''' can log it's state and executing instructions, and can termi
 is about to execute for a second time. These are the required ingredients for part 1.
 
 For part 2, just loop over the program and replace the next nop or jmp instruction, until the program terminates 
-normally instead of being terminated due to an repeated instruction.
+normally instead of being terminated due to a repeated instruction.
+
+## Day 9
+Not too difficult today ... The XMAS class contains a method '''isValid''' that checks the validity of the value at a
+given offset of the numbers list. The XMAS class is constructed with a preamble size to make it generic.
+To find if two numbers in the preamble sum to the value, I simply used two nested loops, where the outer loop start at 
+the given offset - preamble-size, and the inner loop starts at the offset of the outer loop + 1. To solve part 1, 
+simply loop over the numbers and break the loop as soon as '''isValid(numbers, offset)''' returns '''false'''.
+
+Part 2 has been solved using recursion, using a '''boolean[]''' to keep track of the selected numbers. The recursive 
+search should stop as soon as the sum of the selected values is equal to or greater than the provided invalid number. 
+When the sum of selected numbers add up to the provided invalid number, create a list fro the selected number, sort 
+them in natural order, and return the sum of the first, and the last number in the list. 

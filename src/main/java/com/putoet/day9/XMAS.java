@@ -13,29 +13,27 @@ public class XMAS {
         this.preamble = preamble;
     }
 
-    public boolean isValid(List<Long> numbers, int offset) {
-        assert numbers != null;
-        assert offset >= preamble && offset < numbers.size();
-
-        long search = numbers.get(offset);
-        int n1, n2 = offset - preamble;
-        for (n1 = offset - preamble; n1 < offset; n1++) {
-            for (n2 = offset - preamble; n2 < offset; n2++) {
-                if (n2 == n1) continue;
-
-                if (numbers.get(n1) + numbers.get(n2) == search)
-                    return true;
-            }
-        }
-        return n1 != numbers.size() && (n1 != n2);
-    }
-
     public int firstInvalidOffset(List<Long> numbers) {
         int offset = preamble;
         while (isValid(numbers, offset))
             offset++;
 
         return offset >= numbers.size() ? -1 : offset;
+    }
+
+    private boolean isValid(List<Long> numbers, int offset) {
+        assert numbers != null;
+        assert offset >= preamble && offset < numbers.size();
+
+        long search = numbers.get(offset);
+        int n1, n2 = offset - preamble;
+        for (n1 = offset - preamble; n1 < offset; n1++) {
+            for (n2 = n1 + 1; n2 < offset; n2++) {
+                if (numbers.get(n1) + numbers.get(n2) == search)
+                    return true;
+            }
+        }
+        return n1 != numbers.size() && (n1 != n2);
     }
 
     public long weakness(List<Long> numbers, long invalidNumber) {

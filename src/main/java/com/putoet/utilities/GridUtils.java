@@ -12,6 +12,16 @@ public class GridUtils {
                 .toArray(char[][]::new);
     }
 
+    public static char[][] of(int minX, int maxX, int minY, int maxY, char init) {
+        assert maxX > minX && maxY > minY;
+
+        final char[][] grid = new char[maxY - minY][maxX - minX];
+        for (char[] row : grid)
+            Arrays.fill(row, init);
+
+        return grid;
+    }
+
     public static char[][] grow(char[][] grid, char init) {
         final int largerSize = grid.length * 3;
         final char[][] largerGrid = new char[largerSize][largerSize];
@@ -28,7 +38,7 @@ public class GridUtils {
                     for (int y = 0; y < grid.length; y++)
                         for (int x = 0; x < grid.length; x++)
                             Arrays.fill(largerGrid[offsetY + y], offsetX, offsetX + grid.length, init);
-                            // largerGrid[offsetY + y][offsetX + x] = init;
+                    // largerGrid[offsetY + y][offsetX + x] = init;
                 }
             }
 

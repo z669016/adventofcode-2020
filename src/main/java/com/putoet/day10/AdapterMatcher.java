@@ -4,6 +4,7 @@ import org.javatuples.Pair;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class AdapterMatcher {
     public static List<Adapter> of(List<String> lines) {
@@ -77,15 +78,15 @@ public class AdapterMatcher {
             return 1;
 
         final List<Pair<Adapter, Adapter>> pairs = createPairs(stackedAdapter);
-        return combinations(pairs, 0);
+        return combinations(pairs);
     }
 
-    private static long combinations(List<Pair<Adapter, Adapter>> pairs, int offset) {
-        if (pairs.size() == 0 || offset == pairs.size())
-            return 0;
-
-        final List<Pair<Adapter, Adapter>> matches = matches(pairs, offset);
-        return 2 *combinations(matches, 0) + combinations(pairs, offset + 1);
+    private static long combinations(List<Pair<Adapter, Adapter>> pairs) {
+        final List<Pair<Adapter, Adapter>> matches = matches(pairs, 0);
+        return 1 + IntStream.range(0, matches.size())
+                .mapToObj(idx -> matches(pairs, idx))
+                .mapToInt(Collection::size)
+                .sum();
     }
 
     private static List<Pair<Adapter, Adapter>> matches(List<Pair<Adapter, Adapter>> pairs, int offset) {

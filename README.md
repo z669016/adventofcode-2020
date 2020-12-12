@@ -80,4 +80,30 @@ simply loop over the numbers and break the loop as soon as '''isValid(numbers, o
 Part 2 has been solved using recursion, using a '''boolean[]''' to keep track of the selected numbers. The recursive 
 search should stop as soon as the sum of the selected values is equal to or greater than the provided invalid number. 
 When the sum of selected numbers add up to the provided invalid number, create a list fro the selected number, sort 
-them in natural order, and return the sum of the first, and the last number in the list. 
+them in natural order, and return the sum of the first, and the last number in the list.
+
+## Day 10
+Started with an '''Adapter''' class, which can '''stack''' on top of another Adapter instance (ensuring the distance
+between the two in jolts > 0 and <= 3). An '''AdapterMatcher''' reads the imput and creates a stack of adapters. For 
+counting differences of 1 and 3, just walk down the chain. That will do for part 1.
+Part 2 isn't solved yet ...
+
+## Day 11
+Created a '''Seats''' class, which uses a '''Grid''' for the representation of the waiting area. A '''next(...)''' 
+method created a new '''Seats''' instance with updated seats, based on the number of taken adjacent seats. The
+'''GridUtils''' contains methods to count taken seats in the '''Grid''' and methods to check for equality.
+For part 1, keep calling next, until te new instance equals te current one. For part 2, I updated the '''next(...)'''
+method, to accept a strategy (lambda) that returns the number of taken seats, and I added an '''occupiedAround(...)''' 
+(for part 1) and '''occupiedInSight(...)''' (for part 2) methods as strategy. For part 2, just run the algorithm using 
+the second strategy, and you're done.
+
+## Day 12
+By reusing the Point utility class, this day is quite simple. I created a '''Ship''' with a location ('''Point''')
+and a direction (in degrees). The puzzle input translates into a '''List<CourseDirective>''' that is fed to the 
+'''Ship''' (the ship implements '''Consumer<CourseDirective>''''. Finaly the Manhatten distance can be calculated from 
+the ship's location relative to '''Point.ORIGIN'''.
+For part two, I created a '''WayPoint''' that consumes the course directives to update itself. Any FORWARD directive
+if handled by the '''Ship''' by adding the '''WayPoint''' to the ship's location for the specified number of times.
+
+
+

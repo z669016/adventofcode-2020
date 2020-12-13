@@ -105,15 +105,13 @@ the ship's location relative to '''Point.ORIGIN'''.
 For part two, I created a '''WayPoint''' that consumes the course directives to update itself. Any FORWARD directive
 if handled by the '''Ship''' by adding the '''WayPoint''' to the ship's location for the specified number of times.
 
-Increase step to 14671 idx = 5
-Increase step to 278749 idx = 6
-Increase step to 3623737 idx = 4
-Increase step to 83345951 idx = 3
-Increase step to 3083800187 idx = 1
-Increase step to 89430205423 idx = 8
-Increase step to 3666638422343 idx = 0
-Increase step to 1580321160029833 idx = 2
-Increase step to 1580321160029833 idx = 7
-
-
-
+## Day 13
+Interesting challenge today ... part one is quite straight forward. I used '''org.javatuples.Pair'''' to create pairs 
+of bus-id and waiting time, and then searched for the bus with the minimum waiting time.
+The second challenge of the day (part 2) was really challenging to me. The initial algorithm, able to solve the
+sample exercises of course wasn't able to crack the problem using the puzzle input. The numbers were too high, and
+the algorithm just needed much time (and I didn't want to wait). The initial idea was to take steps equal tho the 
+highest bus id. Then I realized, that as soon as the second valid bus-id has been found, the step size could be 
+adjusted to the Least Common Multiple of the current step size, and the newly found bus-id. This increased step size
+each time I found a next match, and the algorithm was blazingly fast. Beware, don't update the step sie immediately, 
+for you might jump over the next valid value.

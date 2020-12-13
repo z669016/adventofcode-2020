@@ -26,10 +26,10 @@ public class Day13 {
 
     public static void part2(List<String> busses) {
         final List<Pair<Integer, Integer>> delays = delays(busses);
-        System.out.println("First matching timestamp is " + findFirstMatchingTimestamp(delays, 100_000_000_000_000L));
+        System.out.println("First matching timestamp is " + findFirstMatchingTimestamp(delays));
     }
 
-    public static long findFirstMatchingTimestamp(List<Pair<Integer, Integer>> delays, long min) {
+    public static long findFirstMatchingTimestamp(List<Pair<Integer, Integer>> delays) {
         assert delays != null && delays.size() > 0;
 
         final long maxTimestamp = EuclideanAlgorithm.lcm(delays.stream().mapToLong(Pair::getValue0).boxed().collect(Collectors.toList()));

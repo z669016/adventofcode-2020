@@ -41,16 +41,11 @@ class Day13Test {
 
     @Test
     void findFirstMatchingTimestamp() {
-//        assertEquals(3417, Day13.findFirstMatchingTimestamp(delays("17,x,13,19"), 1_000L));
-//        assertEquals(754018, Day13.findFirstMatchingTimestamp(delays("67,7,59,61"), 500_000L));
-//        assertEquals(779210, Day13.findFirstMatchingTimestamp(delays("67,x,7,59,61"), 750_000L));
-//        assertEquals(1261476, Day13.findFirstMatchingTimestamp(delays("67,7,x,59,61"), 1_000_000L));
-//        assertEquals(1202161486, Day13.findFirstMatchingTimestamp(delays("1789,37,47,1889"), 1_200_000_000L));
-        assertEquals(3417, Day13.findFirstMatchingTimestamp(delays("17,x,13,19"), 0L));
-        assertEquals(754018, Day13.findFirstMatchingTimestamp(delays("67,7,59,61"), 0L));
-        assertEquals(779210, Day13.findFirstMatchingTimestamp(delays("67,x,7,59,61"), 0L));
-        assertEquals(1261476, Day13.findFirstMatchingTimestamp(delays("67,7,x,59,61"), 0L));
-        assertEquals(1202161486, Day13.findFirstMatchingTimestamp(delays("1789,37,47,1889"), 0L));
+        assertEquals(3417, Day13.findFirstMatchingTimestamp(delays("17,x,13,19")));
+        assertEquals(754018, Day13.findFirstMatchingTimestamp(delays("67,7,59,61")));
+        assertEquals(779210, Day13.findFirstMatchingTimestamp(delays("67,x,7,59,61")));
+        assertEquals(1261476, Day13.findFirstMatchingTimestamp(delays("67,7,x,59,61")));
+        assertEquals(1202161486, Day13.findFirstMatchingTimestamp(delays("1789,37,47,1889")));
     }
 
     List<Pair<Integer, Integer>> delays(String busses) {

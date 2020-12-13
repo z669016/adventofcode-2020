@@ -105,5 +105,15 @@ the ship's location relative to '''Point.ORIGIN'''.
 For part two, I created a '''WayPoint''' that consumes the course directives to update itself. Any FORWARD directive
 if handled by the '''Ship''' by adding the '''WayPoint''' to the ship's location for the specified number of times.
 
+Increase step to 14671 idx = 5
+Increase step to 278749 idx = 6
+Increase step to 3623737 idx = 4
+Increase step to 83345951 idx = 3
+Increase step to 3083800187 idx = 1
+Increase step to 89430205423 idx = 8
+Increase step to 3666638422343 idx = 0
+Increase step to 1580321160029833 idx = 2
+Increase step to 1580321160029833 idx = 7
+
 
 

@@ -27,21 +27,11 @@ public class Day13 {
     public static void part2(List<String> busses) {
         final List<Pair<Integer, Integer>> delays = delays(busses);
         System.out.println("First matching timestamp is " + findFirstMatchingTimestamp(delays, 100_000_000_000_000L));
-
-        // 2144202323094770313 is too high
-        // 1207316338570002 is too high
-        //  103162733339807 is too low
-        //  159383494549004 is
-        //  100000000000000L
-
-        System.out.println("First matching timestamp is " + findFirstMatchingTimestamp(delays, 159383494549004L));
-
     }
 
     public static long findFirstMatchingTimestamp(List<Pair<Integer, Integer>> delays, long min) {
         assert delays != null && delays.size() > 0;
 
-        System.out.println("Delays: " + delays);
         final long maxTimestamp = EuclideanAlgorithm.lcm(delays.stream().mapToLong(Pair::getValue0).boxed().collect(Collectors.toList()));
 
         final boolean[] matched = new boolean[delays.size()];
@@ -51,26 +41,23 @@ public class Day13 {
         long timestamp = step - max.getValue1();
         boolean allMatches = false;
 
-        System.out.println("Initial step size is " + step);
-        System.out.println("Starting at timestamp " + timestamp);
         while (!allMatches && timestamp <= maxTimestamp) {
-            System.out.print(timestamp);
-            System.out.print("\r");
+            boolean adjusted = false;
 
             allMatches = true;
             for (int idx = 0; idx < delays.size(); idx++) {
                 final Pair<Integer, Integer> pair = delays.get(idx);
-//                if (!matched[idx]) {
-                    matched[idx] = (pair.getValue1() == waitingTime(timestamp, pair.getValue0()));
-//                    if (matched[idx]) {
-//                        step = EuclideanAlgorithm.lcm(step, pair.getValue0());
-//                        System.out.println("Increase step to " + step + " idx = " + idx);
-//                    }
-//                }
+                if (!matched[idx]) {
+                    matched[idx] = (timestamp + pair.getValue1()) % pair.getValue0() == 0;
+                    if (matched[idx]) {
+                        step = EuclideanAlgorithm.lcm(step, pair.getValue0());
+                        adjusted = true;
+                    }
+                }
                 allMatches = allMatches && matched[idx];
             }
 
-            if (!allMatches)
+            if (!allMatches && !adjusted)
                 timestamp += step;
         }
         return timestamp;
@@ -95,8 +82,7 @@ public class Day13 {
         for (int idx = 0; idx < busses.size(); idx++) {
             final String bus = busses.get(idx);
             if (!"x".equals(bus)) {
-                final int id = Integer.parseInt(bus);
-                delays.add(new Pair<>(id, idx % id));
+                delays.add(new Pair<>(Integer.parseInt(bus), idx));
             }
         }
 

@@ -1,8 +1,8 @@
 package com.putoet.day11;
 
+import com.putoet.grid.Grid;
+import com.putoet.grid.GridUtils;
 import com.putoet.resources.ResourceLines;
-import com.putoet.utilities.Grid;
-import com.putoet.utilities.GridUtils;
 
 public class Day11 {
     public static void main(String[] args) {

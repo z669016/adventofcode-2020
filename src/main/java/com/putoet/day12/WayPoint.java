@@ -1,6 +1,7 @@
 package com.putoet.day12;
 
-import com.putoet.utilities.Point;
+
+import com.putoet.grid.Point;
 
 import java.util.function.Consumer;
 

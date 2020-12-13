@@ -1,11 +1,11 @@
 package com.putoet.day11;
 
+import com.putoet.grid.Grid;
+import com.putoet.grid.GridUtils;
 import com.putoet.resources.ResourceLines;
-import com.putoet.utilities.Grid;
-import com.putoet.utilities.GridUtils;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SeatsTest {
 

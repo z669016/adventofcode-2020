@@ -1,6 +1,7 @@
 package com.putoet.day3;
 
-import com.putoet.utilities.Point;
+
+import com.putoet.grid.Point;
 
 public class Walker {
     public int walkAndCountTrees(Point slope, TreeArea treeArea) {

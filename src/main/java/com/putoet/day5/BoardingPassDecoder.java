@@ -1,7 +1,7 @@
 package com.putoet.day5;
 
+import com.putoet.grid.Point;
 import com.putoet.utilities.Decoder;
-import com.putoet.utilities.Point;
 
 public class BoardingPassDecoder implements Decoder<String, Point> {
 

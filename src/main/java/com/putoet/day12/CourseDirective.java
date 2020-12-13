@@ -1,6 +1,6 @@
 package com.putoet.day12;
 
-import com.putoet.utilities.Point;
+import com.putoet.grid.Point;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

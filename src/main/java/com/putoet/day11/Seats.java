@@ -1,8 +1,8 @@
 package com.putoet.day11;
 
-import com.putoet.utilities.Grid;
-import com.putoet.utilities.GridUtils;
-import com.putoet.utilities.Point;
+import com.putoet.grid.Grid;
+import com.putoet.grid.GridUtils;
+import com.putoet.grid.Point;
 
 import java.util.List;
 import java.util.function.BiFunction;
@@ -32,7 +32,7 @@ public class Seats {
         return GridUtils.count(grid.grid(), TAKEN_SEAT);
     }
 
-    private static Seats next(Seats seats, Seats next, BiFunction<Seats,Point,Long> strategy, int maxOccupied) {
+    private static Seats next(Seats seats, Seats next, BiFunction<Seats, Point,Long> strategy, int maxOccupied) {
         for (int y = seats.grid.minY(); y < seats.grid.maxY(); y++) {
             for (int x = seats.grid.minX(); x < seats.grid.maxX(); x++) {
                 final long occupied = strategy.apply(seats, Point.of(x, y));

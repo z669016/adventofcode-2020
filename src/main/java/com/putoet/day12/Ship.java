@@ -1,6 +1,6 @@
 package com.putoet.day12;
 
-import com.putoet.utilities.Point;
+import com.putoet.grid.Point;
 import lombok.Data;
 
 import java.util.function.Consumer;

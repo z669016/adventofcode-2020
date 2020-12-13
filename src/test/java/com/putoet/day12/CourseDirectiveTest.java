@@ -1,19 +1,14 @@
 package com.putoet.day12;
 
-import com.putoet.resources.ResourceLines;
-import com.putoet.utilities.Point;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CourseDirectiveTest {
     private static final CourseDirective N3 = CourseDirective.of("N3");
     private static final CourseDirective S5 = CourseDirective.of("S5");
-    private static final CourseDirective E7= CourseDirective.of("E7");
+    private static final CourseDirective E7 = CourseDirective.of("E7");
     private static final CourseDirective W1 = CourseDirective.of("W1");
     private static final CourseDirective L90 = CourseDirective.of("L90");
     private static final CourseDirective R180 = CourseDirective.of("R180");

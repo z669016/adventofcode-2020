@@ -1,8 +1,8 @@
 package com.putoet.day5;
 
+import com.putoet.grid.Point;
 import com.putoet.resources.ResourceLines;
 import com.putoet.utilities.Decoder;
-import com.putoet.utilities.Point;
 
 import java.util.HashSet;
 import java.util.OptionalInt;

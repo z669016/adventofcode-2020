@@ -1,13 +1,13 @@
 package com.putoet.day3;
 
+import com.putoet.grid.Point;
 import com.putoet.resources.ResourceLines;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import com.putoet.utilities.Point;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WalkerTest {
     private TreeArea treeArea;

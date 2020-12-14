@@ -37,4 +37,11 @@ class AdapterMatcherTest {
         final int diffThree = AdapterMatcher.difference(two, 3);
         assertEquals(10, diffThree);
     }
+
+    @Test
+    void combinations() {
+        assertEquals(8L, AdapterMatcher.combinations(one));
+        System.out.println();
+        assertEquals(19208L, AdapterMatcher.combinations(two));
+    }
 }

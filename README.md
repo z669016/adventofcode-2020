@@ -84,9 +84,16 @@ them in natural order, and return the sum of the first, and the last number in t
 
 ## Day 10
 Started with an '''Adapter''' class, which can '''stack''' on top of another Adapter instance (ensuring the distance
-between the two in jolts > 0 and <= 3). An '''AdapterMatcher''' reads the imput and creates a stack of adapters. For 
+between the two in jolts > 0 and <= 3). An '''AdapterMatcher''' reads the input and creates a stack of adapters. For 
 counting differences of 1 and 3, just walk down the chain. That will do for part 1.
-Part 2 isn't solved yet ...
+For part two, a simple recursive function would be able to calculate the number of different solutions ... if it would 
+not be that much adapters you're using. So, a smarter approach is required, for instance by removing all adapters from 
+the stack that cannot be removed anyway, and split the list into sublist which contain alternatives (so split into 
+continuous sequences of adapters that enclose adapters that might be removed). 
+
+For example, the list [(0), 1, 4, 5, 6, 7, 10, 11, 12, 15, 16, 19, (22)], can be split into [[4, 5, 6, 7], 
+[10, 11, 12]]. Then simply calculate the number of combinations of each individual sublist and multiply all calculated 
+values. This approach really solves the issue in only a fraction of a second.  
 
 ## Day 11
 Created a '''Seats''' class, which uses a '''Grid''' for the representation of the waiting area. A '''next(...)''' 

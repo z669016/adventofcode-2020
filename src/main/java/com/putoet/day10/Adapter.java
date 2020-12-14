@@ -21,7 +21,7 @@ public class Adapter {
 
     @Override
     public String toString() {
-        return name;
+        return name.startsWith("adapter") ? String.valueOf(jolts) : "(" + jolts + ")";
     }
 
     @Override

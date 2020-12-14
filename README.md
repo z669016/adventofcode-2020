@@ -115,3 +115,12 @@ highest bus id. Then I realized, that as soon as the second valid bus-id has bee
 adjusted to the Least Common Multiple of the current step size, and the newly found bus-id. This increased step size
 each time I found a next match, and the algorithm was blazingly fast. Beware, don't update the step sie immediately, 
 for you might jump over the next valid value.
+
+## Day 14
+Created a simple '''Instruction''' class and a '''Compiler''' to translate the puzzle imput into instructions. The 
+instructions operate on a '''Memory''' interface. A '''MemoryDecoder''' implements the '''Memory''' interface, and uses
+a '''HashMap<Long,Long>''' as storage for the values (I started with an array, but that didn't work for part2).
+The '''Memory.set(long offset, long value)''' takes care of the masking of the values using simple bit operations 
+before storing them.
+For part 2, I implemented a '''MemoryDecoderV2''' with a set implementation that first creates a '''List<Long>''' of 
+addresses to be changed, after which it stores the provided value at all addresses in the list.  

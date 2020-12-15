@@ -130,4 +130,9 @@ a '''HashMap<Long,Long>''' as storage for the values (I started with an array, b
 The '''Memory.set(long offset, long value)''' takes care of the masking of the values using simple bit operations 
 before storing them.
 For part 2, I implemented a '''MemoryDecoderV2''' with a set implementation that first creates a '''List<Long>''' of 
-addresses to be changed, after which it stores the provided value at all addresses in the list.  
+addresses to be changed, after which it stores the provided value at all addresses in the list.
+
+## Day 15
+Today a straight forward puzzle. I created a '''Numbers''' class that implements the '''Supplier<Long>''' interface. I 
+choose to work with long values, as I expect part 2 will be about big numbers.It also means that a '''List<Long>''' is
+probably not a proper way to capture historical info. So '''Numbers''' uses '''Map<Long>''' to record historical info.  

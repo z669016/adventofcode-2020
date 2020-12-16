@@ -135,4 +135,18 @@ addresses to be changed, after which it stores the provided value at all address
 ## Day 15
 Today a straight forward puzzle. I created a '''Numbers''' class that implements the '''Supplier<Long>''' interface. I 
 choose to work with long values, as I expect part 2 will be about big numbers.It also means that a '''List<Long>''' is
-probably not a proper way to capture historical info. So '''Numbers''' uses '''Map<Long>''' to record historical info.  
+probably not a proper way to capture historical info. So '''Numbers''' uses '''Map<Long>''' to record historical info.
+
+## Day 16
+Again not too difficult, but it did require some work. I started with a '''Ticket''' class, a '''TicketFieldValidator''' 
+class, and a '''PuzzleInput''' class. The '''PuzzleInput''' contains methods to extract from the puzzle input a list of 
+ticket validators, a list of nearby tickets or just my ticked.
+Part 1 means, stream all nearby tickets, stream their field-values, filter all fields that don't match any field-
+validator and sum the filtered values.
+For part 2, I added a '''TicketValidator''' class that can validate a single ticket (a valid ticket contains only 
+fields that match one or more field-validators). It also contains a '''fieldNames(List<Ticket> tockets)''' method that
+determines the field-names. This method first creates a '''Set<String>''' for each field with a list of the field-
+validator names that are valid for that field. Then the array of sets is reduced by continuously removing fields from 
+the possible names set, which occur only once in the array. That leaves an array of field-names. That array is used to 
+filter the "departure" fields from my ticket required to calculate the answer. I made a mistake by using an '''int''' 
+here as the multiplied value appeared too big, so I had to use a '''long'''.

@@ -150,3 +150,13 @@ validator names that are valid for that field. Then the array of sets is reduced
 the possible names set, which occur only once in the array. That leaves an array of field-names. That array is used to 
 filter the "departure" fields from my ticket required to calculate the answer. I made a mistake by using an '''int''' 
 here as the multiplied value appeared too big, so I had to use a '''long'''.
+
+## Day 17
+Based on the Point3D class in my library, I created a Grid3D class. Not backed by a 3 dimensional array, but with a 
+Map<Point3D,Character) to maintain the grid state. The '''Grid3D.evolve()''' method, creates a new instance of the grid
+after extending it 1 point in to all directions (x, y, z). The Point3D contains a convenience method 
+'''Point3D.directions()''' (returns a list of all points 1 position from the origin) and '''Point3D.adjacent()''' 
+(return a list of directions  added to the current point) to get all neighbours of a point. The 
+'''Grid3D.countNeighbours(Point3D,char)''' returns the number of adjacent points with a specific state. This will solve
+part1. For part 2, I decided to clone and adjust Point3D into a Point4D amd Grid3D into Grid4D (just added the fourth 
+dimension). Not the most beautiful approach, but it works and was straight forward. 

@@ -160,3 +160,15 @@ after extending it 1 point in to all directions (x, y, z). The Point3D contains 
 '''Grid3D.countNeighbours(Point3D,char)''' returns the number of adjacent points with a specific state. This will solve
 part1. For part 2, I decided to clone and adjust Point3D into a Point4D amd Grid3D into Grid4D (just added the fourth 
 dimension). Not the most beautiful approach, but it works and was straight forward. 
+
+## Day 18
+Started with an '''Operand''' (extends '''Supplier<Logn>'''), '''Operator''' (implements 
+'''BiFunction<Long,Long,Long>'''), '''Expression''' (extends '''Operand''') and '''Value''' (extends '''Operand''')
+classes, and a '''PlusOperator''', and '''TimesOperator''' (extending '''Operator'''). These classes together should 
+be able to do the math. An '''ExpressionBuilder''' creates an '''Expression''' instance for each line in the puzzle 
+input, using the '''Tokenizer''' to parse a line and return tokens for the symbols (OPEN, CLOSE, VALUE, OPERATOR).
+The catch in the expression builder is to create the expression in the right order to ensure it evaluates from left to 
+right, and not the other way around. This approach solved part 1.
+For part 2 an '''ExpressionBuilderPlusPrecedence''' (extending '''ExpressionBuilder''') is used, that creates 
+expressions for plus expressions (basically, it puts a plus expression between parentheses). Now the only difference 
+between part 1 and part 2 is the expression builder used.

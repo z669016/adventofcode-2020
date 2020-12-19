@@ -14,10 +14,6 @@ public class ListRule extends Rule {
         this.idList = idList;
     }
 
-    public List<Integer> idList() {
-        return idList;
-    }
-
     @Override
     protected Set<String> createValues() {
         final List<Rule> ruleList = idList.stream()
@@ -29,15 +25,5 @@ public class ListRule extends Rule {
             set = rule.join(set);
 
         return set;
-    }
-
-    @Override
-    protected boolean references(int id) {
-        return idList.contains(id);
-    }
-
-    @Override
-    protected Set<Integer> references(Set<Integer> set) {
-        return Set.copyOf(idList);
     }
 }

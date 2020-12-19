@@ -5,6 +5,8 @@ import java.util.Set;
 
 public class Rule8 extends ChoiceRule {
     private final Rules rules;
+    private Rule rule42;
+    private int rule42Length;
 
     public Rule8(int id, Rules rules, List<Integer> idListOne, List<Integer> idListTwo) {
         super(id, rules, idListOne, idListTwo);
@@ -13,21 +15,22 @@ public class Rule8 extends ChoiceRule {
 
     @Override
     public boolean isValid(String toValidate) {
-        if (toValidate.length() == 0)
+        init();
+
+        if (toValidate.length() < rule42Length)
             return false;
 
-        if (toValidate.length() % 5 != 0)
-            return false;
-
-        // Rule 8: 42 | 42 8
-        final Rule rule42 = rules.get(42);
-
-        // use the fact that rule42 only returns values of length 5
-        while (toValidate.length() > 0 && rule42.isValid(toValidate.substring(0, 5))) {
-            toValidate = toValidate.substring(5);
+        while (toValidate.length() >= rule42Length && rule42.isValid(toValidate.substring(0, rule42Length))) {
+            toValidate = toValidate.substring(rule42Length);
         }
 
         return toValidate.length() == 0;
+    }
+
+    private void init() {
+        // Rule 8: 42 | 42 8
+        rule42 = rules.get(42);
+        rule42Length = rule42.values().stream().findFirst().get().length();
     }
 
     @Override

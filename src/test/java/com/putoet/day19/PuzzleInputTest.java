@@ -11,7 +11,7 @@ class PuzzleInputTest {
 
     @BeforeEach
     void setup() {
-        puzzleInput = new PuzzleInput(ResourceLines.list("/day19.txt"));
+        puzzleInput = new PuzzleInput(ResourceLines.list("/day19-1.txt"));
     }
 
     @Test

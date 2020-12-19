@@ -1,12 +1,8 @@
 package com.putoet.day19;
 
-import org.javatuples.Pair;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Rules {
     private final Map<Integer, Rule> rules = new HashMap<>();
@@ -38,11 +34,5 @@ public class Rules {
 
     public int size() {
         return rules.size();
-    }
-
-    public Set<Integer> references(int id) {
-        return rules.keySet().stream()
-                .filter(key -> rules.get(key).references(id))
-                .collect(Collectors.toSet());
     }
 }

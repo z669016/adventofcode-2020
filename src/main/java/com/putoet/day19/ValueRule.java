@@ -14,14 +14,4 @@ public class ValueRule extends Rule {
     protected Set<String> createValues() {
         return Set.of(value);
     }
-
-    @Override
-    protected boolean references(int id) {
-        return false;
-    }
-
-    @Override
-    protected Set<Integer> references(Set<Integer> set) {
-        return Set.of();
-    }
 }

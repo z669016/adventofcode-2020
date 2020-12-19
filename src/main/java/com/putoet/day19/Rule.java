@@ -43,11 +43,9 @@ public abstract class Rule implements Validator<String> {
     }
 
     private static List<Integer> asIntList(String text) {
-        final List<Integer> idList = Arrays.stream(text.split(" "))
-                .mapToInt(Integer::parseInt)
-                .boxed()
+        return Arrays.stream(text.split(" "))
+                .map(Integer::parseInt)
                 .collect(Collectors.toList());
-        return idList;
     }
 
     protected Set<String> values() {
@@ -66,10 +64,6 @@ public abstract class Rule implements Validator<String> {
     }
 
     protected abstract Set<String> createValues();
-
-    protected abstract boolean references(int id);
-
-    protected abstract Set<Integer> references(Set<Integer> set);
 
     protected Set<String> join(Set<String> otherValues) {
         return otherValues.isEmpty() ? new HashSet<>(values()) : otherValues.stream()

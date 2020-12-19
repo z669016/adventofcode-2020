@@ -172,3 +172,24 @@ right, and not the other way around. This approach solved part 1.
 For part 2 an '''ExpressionBuilderPlusPrecedence''' (extending '''ExpressionBuilder''') is used, that creates 
 expressions for plus expressions (basically, it puts a plus expression between parentheses). Now the only difference 
 between part 1 and part 2 is the expression builder used.
+
+## Day 19
+A nice puzzle today. The base classe '''Rule''' (implementing the '''Validator<String>''' interface) and its subclasses
+'''ValueRule''', '''ListRule''', and '''ChoiceRule''' are the basis for solving the puzzle. The base class contains the 
+factory method, and is used by the '''Rules''' class to create a map of all rules (useful for selecting a rule to 
+evaluate). The helper class '''PuzzleInput''' again takes care of splitting the input file into rules and messages to 
+be evaluated. A bit of work, but straight forward for part 1.
+Part two requires some hacking on the design, although you should be able to solve it generically as well. I created 
+specific instances of '''Rule8''', '''Rule11''', and '''Rule0''', that know their definition and use the length of 
+their values and assume the length of a rule 42 value, and a rule 31 value are equal.
+
+'''Rule11''' validation simply takes the centered sequence to be validated (length of a normal rule 11 value, which is 
+a rule 42 value plus a rule 31 value). If that center matches the 'old' rule 11, it removes the center, and repeats the 
+test from the start, until a tes fails (then the text doesn't match rule 11) or the text is empty (than it apearently 
+matches all 'old' rule 11 checks).  
+
+'''Rule0''' checks on the list of rule 8 and rule 11, by repeatingly splitting the text to be checked in a rule8 part,
+and a rule 11 part. On the first iteration, the rule 8 part is 1 rule 42 value long, the second time 2, and so on, 
+until the match was found on both parts.
+
+It worked on part 2, but I don;t say is well designed.

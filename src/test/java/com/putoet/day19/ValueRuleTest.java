@@ -5,11 +5,9 @@ import org.junit.jupiter.api.Test;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class ValueRuleTest {
-    final Rule rule = new ValueRule("a");
+    final Rule rule = new ValueRule(0, "a");
 
     @Test
     void isValid() {

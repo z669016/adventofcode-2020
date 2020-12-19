@@ -17,16 +17,19 @@ class ListRuleTest {
     @BeforeEach
     void setup() {
         rules = mock(Rules.class);
-        when(rules.get(0)).thenReturn(new ValueRule("a"));
-        when(rules.get(1)).thenReturn(new ValueRule("b"));
-        when(rules.get(2)).thenReturn(new ValueRule("c"));
+        when(rules.get(0)).thenReturn(new ValueRule(0, "a"));
+        when(rules.get(1)).thenReturn(new ValueRule(1, "b"));
+        when(rules.get(2)).thenReturn(new ValueRule(2, "c"));
 
-        rule = new ListRule(rules, List.of(0, 1, 2));
+        rule = new ListRule(3, rules, List.of(0, 1, 2));
     }
 
     @Test
     void createValues() {
+        assertEquals(3, rule.id());
+        assertFalse(rule.initialized());
         assertEquals(Set.of("abc"), rule.values());
+        assertTrue(rule.initialized());
     }
 
     @Test
@@ -40,6 +43,4 @@ class ListRuleTest {
         assertEquals(Set.of("eabc"), rule.join(Set.of("e")));
         assertEquals(Set.of("eabc", "fabc"), rule.join(Set.of("e", "f")));
     }
-
-
 }

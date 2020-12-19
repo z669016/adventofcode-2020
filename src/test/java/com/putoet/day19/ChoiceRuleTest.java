@@ -17,14 +17,14 @@ class ChoiceRuleTest {
     @BeforeEach
     void setup() {
         rules = mock(Rules.class);
-        when(rules.get(0)).thenReturn(new ValueRule("a"));
-        when(rules.get(1)).thenReturn(new ValueRule("b"));
-        when(rules.get(2)).thenReturn(new ValueRule("c"));
-        when(rules.get(3)).thenReturn(new ValueRule("d"));
-        when(rules.get(4)).thenReturn(new ValueRule("e"));
-        when(rules.get(5)).thenReturn(new ValueRule("f"));
+        when(rules.get(0)).thenReturn(new ValueRule(0, "a"));
+        when(rules.get(1)).thenReturn(new ValueRule(1, "b"));
+        when(rules.get(2)).thenReturn(new ValueRule(2, "c"));
+        when(rules.get(3)).thenReturn(new ValueRule(3, "d"));
+        when(rules.get(4)).thenReturn(new ValueRule(4, "e"));
+        when(rules.get(5)).thenReturn(new ValueRule(5, "f"));
 
-        rule = new ChoiceRule(rules, List.of(0, 1, 2), List.of(3, 4, 5));
+        rule = new ChoiceRule(6, rules, List.of(0, 1, 2), List.of(3, 4, 5));
     }
 
     @Test

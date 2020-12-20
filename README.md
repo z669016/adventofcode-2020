@@ -192,4 +192,19 @@ matches all 'old' rule 11 checks).
 and a rule 11 part. On the first iteration, the rule 8 part is 1 rule 42 value long, the second time 2, and so on, 
 until the match was found on both parts.
 
-It worked on part 2, but I don;t say is well designed.
+It worked on part 2, but I won't say is well designed.
+
+## Day 20
+Well, well, well ... a real jigsaw puzzle to solve ... I started with a '''Tile''' class to handle puzzle input and
+match tile borders. Then I created a '''Puzzler''' class that would solve the puzzle just as you normally would.
+
+The '''Puzzler''' class starts with creating a map with, for each tile, a list with possible neighbours. This 
+immediately solves part 1, for all tiles with only two neighbours will be corners.
+
+Part 2 is solved step by step ... first create the Tile grid that matches. Pick a corner, flip/rotate until it's on the 
+top/left corner (i.e. one of the neighbours is below, and the other is at the right). From there. place all other 
+pieces and flip/rotate where required. Then create an image from the Tile grid (remove the borders and glue the grid 
+together), and flip/rotate until you've been able to count sea monsters. Then paint the sea monsters (replace sea 
+monster '#' positions with an 'O'), and count the remaining '#' in the painted image.
+
+All in all, it requires quite some code, but it works!

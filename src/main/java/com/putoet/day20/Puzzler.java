@@ -1,6 +1,5 @@
 package com.putoet.day20;
 
-import com.putoet.grid.Grid;
 import com.putoet.grid.GridUtils;
 import com.putoet.grid.Point;
 
@@ -152,6 +151,7 @@ public class Puzzler {
 
     /**
      * Copy the image and paint the sea monsters in the copied image
+     *
      * @param image
      * @return
      */

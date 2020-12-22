@@ -111,30 +111,18 @@ public class Tile {
     }
 
     public boolean matchNorth(Tile other) {
-        if (this.id == other.id)
-            throw new IllegalStateException("You cannot match a tile with itself");
-
         return this.north().equals(other.south());
     }
 
     public boolean matchEast(Tile other) {
-        if (this.id == other.id)
-            throw new IllegalStateException("You cannot match a tile with itself");
-
         return this.east().equals(other.west());
     }
 
     public boolean matchSouth(Tile other) {
-        if (this.id == other.id)
-            throw new IllegalStateException("You cannot match a tile with itself");
-
         return other.matchNorth(this);
     }
 
     public boolean matchWest(Tile other) {
-        if (this.id == other.id)
-            throw new IllegalStateException("You cannot match a tile with itself");
-
         return other.matchEast(this);
     }
 

@@ -7,22 +7,17 @@ import java.util.Set;
 public class RecursiveCombat extends Combat {
     private final Set<String> previousRounds = new HashSet<>();
     private Player winner;
-    private final int gameId;
 
     public RecursiveCombat(List<Integer> cards1, List<Integer> cards2) {
-        this(1, cards1, cards2);
-    }
-
-    public RecursiveCombat(int gameId, List<Integer> cards1, List<Integer> cards2) {
         super(cards1, cards2);
-        this.gameId = gameId;
     }
 
     public void play() {
         int subId = 0;
         while (player1.hasNext() && player2.hasNext()) {
-            // if this config was seen before, player1 wins to prevent the game continues indefinitely
-            if (!(previousRounds.add(player1.toString()) /* && previousRounds.add(player2.toString()) */ )) {
+            // if this config (the combination of cards for player 1 AND player 2) was seen before, player1 wins.
+            // This is to prevent the game continues indefinitely
+            if (!(previousRounds.add(player1.cards().toString()+player2.cards().toString()))) {
                 winner = player1;
                 return;
             }
@@ -37,7 +32,7 @@ public class RecursiveCombat extends Combat {
 
                 // in a sub game, each player starts with the number of cards that equals the drawn cards value
                 final RecursiveCombat subGame =
-                        new RecursiveCombat(gameId * 100 + subId++, player1.cards().subList(0, card1), player2.cards().subList(0, card2));
+                        new RecursiveCombat(player1.cards().subList(0, card1), player2.cards().subList(0, card2));
 
                 subGame.play();
 

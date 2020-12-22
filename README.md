@@ -214,8 +214,20 @@ A possible faster solution would have been to first create a list wil all tiles 
 a first tile on the top-left and trying to add tiles at the right and below... maybe I'll rewrite my solution.  
 
 ## Day 21
-Thhis is a puzzle for deduction. First create an overview with possible foods per possible allergen. From that, create 
+This is a puzzle for deduction. First create an overview with possible foods per possible allergen. From that, create 
 a list of possible allergens per ingredient. This overview will contain allergens that are contained only in one 
 ingredient. Then iterate over the sets, and when there are multiple ingredients that could contain an allergen, remove 
 the ingredients that are specificly linked to one allergen. This basically solves part 2, and it enables you to compile
 a list of ingredients that cannot contain an allergen. Solving part 1 is simply counting occurrences.
+
+# Day 22
+Not so difficult today ... A '''Player''' class represents a player, holds the cards for a player, and calculates the 
+score. The '''Combat''' class takes two lists of card numbers and creates two players. The '''play()''' method runs the 
+game by taking one card from each player, and follow the rules on winning/loosing. Straight forward and rather simple.
+
+Part two requires a little bit more efford. I created a '''RecursiveCombat''' (that inherits from '''Combat''') which 
+keeps a history (as a '''Set<String>''') and implements different rules in the '''play()''' method. There was a catch 
+in the stop-condition for the recursion. I initially implemented it as "if either player one or player two, gets a set 
+of cards that was in the game before, then stop", but it should have been "if player 1 and player 2, at the same time, 
+have a set of cards they have had before, then stop" (I need to admit, as the rule is to prevent infinity, the second 
+interpretation makes more sense). 

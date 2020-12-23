@@ -231,3 +231,14 @@ in the stop-condition for the recursion. I initially implemented it as "if eithe
 of cards that was in the game before, then stop", but it should have been "if player 1 and player 2, at the same time, 
 have a set of cards they have had before, then stop" (I need to admit, as the rule is to prevent infinity, the second 
 interpretation makes more sense). 
+
+## Day 23
+I've seen something similar once before ... using a List (either ArrayList or LinkedList) won't do it for you, as part 
+two of this assignment will be something with a much bigger list and way more iterations. The solution is to use an 
+array that contains the references for the next element in the list. On each iteration you need to update at most three 
+values of the array (current needs to reference a new next value; the destination needs to reference the first element 
+of the moved sublist; the last element of the moved sublist needs to reference the original value of the destination).
+
+Getting a value of an element or an index only requires some searching for the first nine values (the puzzle init). For
+the rest of the array, the index and the value are related to the array position.
+

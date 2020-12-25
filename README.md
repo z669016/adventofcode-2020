@@ -242,3 +242,29 @@ of the moved sublist; the last element of the moved sublist needs to reference t
 Getting a value of an element or an index only requires some searching for the first nine values (the puzzle init). For
 the rest of the array, the index and the value are related to the array position.
 
+## Day 24
+A grid of hexagonal figures can be represented using a normal coordination system, if you abby to some specific rules:
+* On rows with an even Y value, only use even X values like (0,0), (-2,0), and (4,0) 
+* On rows with a uneven Y value, only use uneven X values like (1,1), (-1,-3), and (3,3)
+* To move left or right on the same row (same Y value) increase (or decrease) X with 2
+* to move up or down increase (or decrease) Y and X, i.e. from (0,0) to (1,1) means up right, and (-1,-1) is down left
+
+Using this coordination system, I could reuse the '''Point''' class to navigate the tiles ('''HexagonalDirection'''):
+* EAST (e) -> Point.add(2, 0)
+* WEST (w) -> Point.add(-2, 0)
+* NORTH EAST (ne) -> Point.add(1, 1)
+* NORTH WEST (nw) -> Point.add(-1, 1)
+* SOUTH EAST (se) -> Point.add(1, -1)
+* SOUTH WEST (sw) -> Point.add(11, -1)
+
+For part one, just walk the routes ('''TileVisitor'''), starting at '''Point.ORIGIN''' and flip the tile at the end of
+the route. While walking the route add all the tiles on the route to a set. At the end, count the black tiles in 
+the set.
+
+For part two, I created a '''TileArt''' class with a '''next()''' method, to simulate a next day. The trick is, to 
+ensure there is a complete ring of tiles surrounding any black tiles, before you do the transformation, as these tiles 
+could flip as well during transformation (as they connect to at least one black one). So ndeed, the fidure grows during
+the transformations.  
+
+## Day 25
+As usual a simple and straight forward puzzle, ad we all should enjoy Christmas today...

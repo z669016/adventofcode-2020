@@ -2,9 +2,9 @@ package com.putoet.day16;
 
 import com.putoet.utilities.Validator;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class TicketValidator implements Validator<Ticket> {
     private final List<TicketFieldValidator> validators;
@@ -30,7 +30,7 @@ public class TicketValidator implements Validator<Ticket> {
         final Map<String, TicketFieldValidator> map = validators.stream()
                 .collect(Collectors.toMap(TicketFieldValidator::fieldName, validator -> validator));
 
-        final Set<String>[] possibleFieldNames = new HashSet[fields.size()];
+        final Set<String>[] possibleFieldNames = (Set<String>[]) Array.newInstance(HashSet.class, fields.size());
         for (String fieldName : fields) {
             final TicketFieldValidator validator = map.get(fieldName);
 
@@ -46,11 +46,11 @@ public class TicketValidator implements Validator<Ticket> {
 
         final Set<String> single = new HashSet<>();
         while (single.size() != fields.size()) {
-            for (int idx = 0; idx < possibleFieldNames.length; idx++) {
-                if (possibleFieldNames[idx].size() == 1)
-                    single.addAll(possibleFieldNames[idx]);
+            for (Set<String> possibleFieldName : possibleFieldNames) {
+                if (possibleFieldName.size() == 1)
+                    single.addAll(possibleFieldName);
                 else
-                    possibleFieldNames[idx].removeIf(single::contains);
+                    possibleFieldName.removeIf(single::contains);
             }
         }
 

@@ -53,7 +53,7 @@ public class Grid3D {
     }
 
     public long countNeighbours(Point3D point, char c) {
-        return point.adjacend().stream()
+        return point.adjacent().stream()
                 .filter(grid::containsKey)
                 .filter(p -> grid.get(p) == c)
                 .count();
@@ -80,7 +80,7 @@ public class Grid3D {
         final Grid3D newGrid = new Grid3D(grid);
 
         for (Point3D point : grid.keySet()) {
-            final List<Point3D> neighbours = point.adjacend();
+            final List<Point3D> neighbours = point.adjacent();
             neighbours.stream()
                     .filter(newPoint -> !grid.containsKey(newPoint))
                     .forEach(newPoint -> newGrid.set(newPoint, INACTIVE));
@@ -93,12 +93,12 @@ public class Grid3D {
         if (grid.size() == 0)
             return;
 
-        final int maxZ = grid.keySet().stream().mapToInt(point -> point.z).max().getAsInt();
-        final int minZ = grid.keySet().stream().mapToInt(point -> point.z).min().getAsInt();
-        final int maxY = grid.keySet().stream().mapToInt(point -> point.y).max().getAsInt();
-        final int minY = grid.keySet().stream().mapToInt(point -> point.y).min().getAsInt();
-        final int maxX = grid.keySet().stream().mapToInt(point -> point.x).max().getAsInt();
-        final int minX = grid.keySet().stream().mapToInt(point -> point.x).min().getAsInt();
+        final int maxZ = grid.keySet().stream().mapToInt(Point3D::z).max().getAsInt();
+        final int minZ = grid.keySet().stream().mapToInt(Point3D::z).min().getAsInt();
+        final int maxY = grid.keySet().stream().mapToInt(Point3D::y).max().getAsInt();
+        final int minY = grid.keySet().stream().mapToInt(Point3D::y).min().getAsInt();
+        final int maxX = grid.keySet().stream().mapToInt(Point3D::x).max().getAsInt();
+        final int minX = grid.keySet().stream().mapToInt(Point3D::x).min().getAsInt();
 
         for (int z = minZ; z <= maxZ; z++) {
             System.out.println("z=" + z);

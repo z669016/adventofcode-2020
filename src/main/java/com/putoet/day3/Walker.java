@@ -8,7 +8,7 @@ public class Walker {
         Point position = Point.ORIGIN;
         int trees = 0;
 
-        while (position.y < treeArea.height()) {
+        while (position.y() < treeArea.height()) {
             if (treeArea.treeAt(position))
                 trees++;
 

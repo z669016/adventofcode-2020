@@ -27,7 +27,7 @@ public class WayPoint implements Consumer<CourseDirective> {
 
     private Point rotateRight(Point point, int length) {
         while(length > 0) {
-            point = Point.of(point.y, -1 * point.x);
+            point = Point.of(point.y(), -1 * point.x());
             length--;
         }
 
@@ -36,7 +36,7 @@ public class WayPoint implements Consumer<CourseDirective> {
 
     private Point rotateLeft(Point point, int length) {
         while(length > 0) {
-            point = Point.of(-1 * point.y, point.x);
+            point = Point.of(-1 * point.y(), point.x());
             length--;
         }
 

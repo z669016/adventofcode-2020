@@ -49,8 +49,8 @@ public class Seats {
     private static long occupiedAround(Seats seats, Point point) {
         final List<Point> adjacent = point.adjacend();
         return adjacent.stream()
-                .filter(p -> seats.grid.contains(p.x, p.y))
-                .filter(p -> seats.grid.get(p.x, p.y) == TAKEN_SEAT)
+                .filter(p -> seats.grid.contains(p.x(), p.y()))
+                .filter(p -> seats.grid.get(p.x(), p.y()) == TAKEN_SEAT)
                 .count();
     }
 
@@ -63,10 +63,10 @@ public class Seats {
 
     private static long occupiedInSight(Seats seats, Point point, Point direction) {
         point = point.add(direction);
-        while (seats.grid.contains(point.x, point.y)) {
-            if (seats.grid.get(point.x, point.y) == TAKEN_SEAT)
+        while (seats.grid.contains(point.x(), point.y())) {
+            if (seats.grid.get(point.x(), point.y()) == TAKEN_SEAT)
                 return 1;
-            if (seats.grid.get(point.x, point.y) == EMPTY_SEAT)
+            if (seats.grid.get(point.x(), point.y()) == EMPTY_SEAT)
                 return 0;
             point = point.add(direction);
         }

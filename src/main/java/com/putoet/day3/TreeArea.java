@@ -24,10 +24,10 @@ public class TreeArea {
     public int height() {return grid.length; }
 
     public boolean treeAt(Point point) {
-        assert point.y < grid.length;
+        assert point.y() < grid.length;
 
-        final int x = point.x % width;
-        return grid[point.y][x] == TREE;
+        final int x = point.x() % width;
+        return grid[point.y()][x] == TREE;
     }
 
     public static TreeArea of(List<String> lines) {

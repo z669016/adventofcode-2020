@@ -56,7 +56,7 @@ public class Day5 {
     }
 
     private static boolean isNotFirstOrLastRow(Point point) {
-        return point.y != 0 && point.y != 127;
+        return point.y() != 0 && point.y() != 127;
     }
 
     private static Set<Point> findEmptySeats(Set<Point> seatsUsed) {

@@ -2,53 +2,48 @@ package com.putoet.day5;
 
 import com.putoet.grid.Point;
 import com.putoet.resources.ResourceLines;
-import com.putoet.utilities.Decoder;
+import com.putoet.utils.Timer;
 
 import java.util.HashSet;
-import java.util.OptionalInt;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Day5 {
     public static void main(String[] args) {
-        final Decoder<String, Point> boardingPassDecoder = new BoardingPassDecoder();
-        final Set<Point> seatsUsed = ResourceLines.list("/day5.txt").stream()
+        final var boardingPassDecoder = new BoardingPassDecoder();
+        final var seatsUsed = ResourceLines.list("/day5.txt").stream()
                 .map(boardingPassDecoder::decode)
                 .collect(Collectors.toSet());
 
-        part1(seatsUsed);
-        part2(seatsUsed);
+        Timer.run(() -> part1(seatsUsed));
+        Timer.run(() -> part2(seatsUsed));
     }
 
     private static void part1(Set<Point> seatsUsed) {
-        final Decoder<Point, Integer> seatDecoder = new SeatIDDecoder();
-        final OptionalInt max = seatsUsed.stream()
+        final var seatDecoder = new SeatIDDecoder();
+        final var max = seatsUsed.stream()
                 .mapToInt(seatDecoder::decode)
-                .max();
+                .max()
+                .orElseThrow();
 
-        if (max.isEmpty())
-            System.out.println("No seats used");
-        else
-            System.out.println("the highest seat ID on a boarding pass is " + max.getAsInt());
+        System.out.println("the highest seat ID on a boarding pass is " + max);
     }
 
     private static void part2(Set<Point> seatsUsed) {
-        final Decoder<Point, Integer> seatDecoder = new SeatIDDecoder();
+        final var seatDecoder = new SeatIDDecoder();
 
-        final Set<Integer> seatsIDsUsed = seatsUsed.stream().
+        final var seatsIDsUsed = seatsUsed.stream().
                 map(seatDecoder::decode)
                 .collect(Collectors.toSet());
 
-        final OptionalInt mySeat = findEmptySeats(seatsUsed).stream()
+        final var mySeat = findEmptySeats(seatsUsed).stream()
                 .filter(Day5::isNotFirstOrLastRow)
                 .mapToInt(seatDecoder::decode)
                 .filter(id -> prevAndNextSeatUsed(seatsIDsUsed, id))
-                .findFirst();
+                .findFirst()
+                .orElseThrow();
 
-        if (mySeat.isEmpty())
-            System.out.println("My seat not found");
-        else
-            System.out.println("The empty seat has seatID " + mySeat.getAsInt());
+        System.out.println("The empty seat has seatID " + mySeat);
     }
 
     private static boolean prevAndNextSeatUsed(Set<Integer> seatsIDsUsed, Integer id) {
@@ -60,10 +55,10 @@ public class Day5 {
     }
 
     private static Set<Point> findEmptySeats(Set<Point> seatsUsed) {
-        final Set<Point> emptySeats = new HashSet<>();
-        for (int y = 0; y < 128; y++) {
-            for (int x = 0; x < 8; x++) {
-                final Point seat = Point.of(x, y);
+        final var emptySeats = new HashSet<Point>();
+        for (var y = 0; y < 128; y++) {
+            for (var x = 0; x < 8; x++) {
+                final var seat = Point.of(x, y);
                 if (!seatsUsed.contains(seat))
                     emptySeats.add(seat);
             }

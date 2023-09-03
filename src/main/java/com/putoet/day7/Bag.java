@@ -1,18 +1,18 @@
 package com.putoet.day7;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Bag {
+class Bag {
     private final String color;
-    private List<Bag> contains = new ArrayList<>();
-    private List<Integer> counts = new ArrayList<>();
+    private final List<Bag> contains = new ArrayList<>();
+    private final List<Integer> counts = new ArrayList<>();
     private int count = -1;
 
-    public Bag(String color) {
-        assert color != null;
-
+    public Bag(@NotNull String color) {
         this.color = color;
     }
 
@@ -24,10 +24,7 @@ public class Bag {
         return contains;
     }
 
-    public void addContent(Bag bag, int count) {
-        assert bag != null;
-        assert color != null;
-
+    public void addContent(@NotNull Bag bag, int count) {
         if (contains.contains(bag))
             throw new IllegalArgumentException(color + " bag already contains " + bag.color + " bag(s)");
 
@@ -36,9 +33,10 @@ public class Bag {
     }
 
     public int count() {
+        // memoization ... -1 means field not calculated yet
         if (count == -1) {
             count = 0;
-            for (int idx = 0; idx < contains.size(); idx++) {
+            for (var idx = 0; idx < contains.size(); idx++) {
                 count += (counts.get(idx) + counts.get(idx) * contains.get(idx).count());
             }
         }
@@ -46,17 +44,15 @@ public class Bag {
         return count;
     }
 
-    public boolean contains(Bag bag) {
-        assert bag != null;
-
+    public boolean contains(@NotNull Bag bag) {
         if (equals(bag))
             return false;
 
         if (contains.contains(bag))
             return true;
 
-        boolean containsColor = false;
-        for (Bag inner : contains) {
+        var containsColor = false;
+        for (var inner : contains) {
             containsColor = (containsColor || inner.contains(bag));
         }
         return containsColor;
@@ -64,10 +60,10 @@ public class Bag {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder(color);
+        final var sb = new StringBuilder(color);
         sb.append(" [");
-        boolean first = true;
-        for (int idx = 0; idx < contains.size(); idx++) {
+        var first = true;
+        for (var idx = 0; idx < contains.size(); idx++) {
             if (!first)
                 sb.append(", ");
             sb.append(counts.get(idx)).append(" ").append(contains.get(idx).color);
@@ -81,13 +77,12 @@ public class Bag {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Bag)) return false;
-        Bag bag = (Bag) o;
-        return color.equals(bag.color);
+        if (!(o instanceof Bag bag)) return false;
+        return count == bag.count && Objects.equals(color, bag.color) && Objects.equals(contains, bag.contains) && Objects.equals(counts, bag.counts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(color);
+        return Objects.hash(color, contains, counts, count);
     }
 }

@@ -1,30 +1,31 @@
 package com.putoet.day7;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Bags {
+class Bags {
     private static final Pattern BAG_DEFINITION = Pattern.compile("^(\\d)+ (.+) bag.*$");
     private static final Pattern BAG_DECLARATION = Pattern.compile("^(.+) bags contain .*$");
 
-    public static Map<String, Bag> loadBags(List<String> lines) {
-        final Map<String, Bag> bags = new HashMap<>();
+    public static Map<String, Bag> loadBags(@NotNull List<String> lines) {
+        final var bags = new HashMap<String, Bag>();
 
-        for (String line : lines) {
-            final Bag bag = declareBag(bags, line);
-            final String[] bagDefinitions = bagDefinitions(line);
+        for (var line : lines) {
+            final var bag = declareBag(bags, line);
+            final var bagDefinitions = bagDefinitions(line);
 
-            for (String bagDefinition : bagDefinitions) {
+            for (var bagDefinition : bagDefinitions) {
                 if (!bagDefinition.startsWith("no ")) {
-                    final Matcher matcher = BAG_DEFINITION.matcher(bagDefinition);
+                    final var matcher = BAG_DEFINITION.matcher(bagDefinition);
                     if (!matcher.matches())
                         throw new IllegalArgumentException("Invalid bag definition '" + bagDefinition + "'");
 
-                    final int count = Integer.parseInt(matcher.group(1));
-                    final String color = matcher.group(2);
+                    final var count = Integer.parseInt(matcher.group(1));
+                    final var color = matcher.group(2);
                     bag.addContent(createBag(bags, color), count);
                 }
             }
@@ -34,7 +35,7 @@ public class Bags {
     }
 
     private static Bag declareBag(Map<String, Bag> bags, String line) {
-        Bag bag = bagDeclaration(line);
+        final var bag = bagDeclaration(line);
         if (bags.containsKey(bag.color()))
             return bags.get(bag.color());
 
@@ -50,7 +51,7 @@ public class Bags {
     }
 
     private static Bag bagDeclaration(String line) {
-        final Matcher matcher = BAG_DECLARATION.matcher(line);
+        final var matcher = BAG_DECLARATION.matcher(line);
         if (!matcher.matches())
             throw new IllegalArgumentException("Invalid bag declaration '" + line + "'");
 

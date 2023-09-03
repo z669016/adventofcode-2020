@@ -1,30 +1,32 @@
 package com.putoet.day7;
 
 import com.putoet.resources.ResourceLines;
+import com.putoet.utils.Timer;
 
 import java.util.Map;
 
 public class Day7 {
     public static void main(String[] args) {
-        final Map<String,Bag> bags = Bags.loadBags(ResourceLines.list("/day7.txt"));
+        final var bags = Bags.loadBags(ResourceLines.list("/day7.txt"));
 
-        part1(bags);
-        part2(bags);
+        var goldBag = Timer.run(() -> part1(bags));
+        Timer.run(() -> part2(goldBag));
     }
 
-    private static void part1(Map<String, Bag> bags) {
-        final Bag gold = bags.get("shiny gold");
+    private static Bag part1(Map<String, Bag> bags) {
+        final var gold = bags.get("shiny gold");
 
-        final long count = bags.values().stream()
+        final var count = bags.values().stream()
                 .filter(bag -> bag.contains(gold))
                 .count();
 
         System.out.println("Number of bags eventually contain at least one shiny gold bag " + count);
+
+        return gold;
     }
 
-    private static void part2(Map<String, Bag> bags) {
-        final Bag gold = bags.get("shiny gold");
-        final long count = gold.count();
+    private static void part2(Bag gold) {
+        final var count = gold.count();
 
         System.out.println("Number of bags eventually contain at least one shiny gold bag " + count);
     }

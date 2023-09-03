@@ -13,7 +13,7 @@ class XMASTest {
 
     @Test
     void firstInvalid() {
-        final List<Long> numbers = ResourceLines.longList("/day9.txt");
+        final List<Long> numbers = ResourceLines.list("/day9.txt", Long::parseLong);
         test(numbers);
     }
 
@@ -40,7 +40,7 @@ class XMASTest {
 
     @Test
     void weakness() {
-        final List<Long> numbers = ResourceLines.longList("/day9.txt");
+        final List<Long> numbers = ResourceLines.list("/day9.txt", Long::parseLong);
         assertEquals(62, xmas.weakness(numbers, 127));
     }
 }

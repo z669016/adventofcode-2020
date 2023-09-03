@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Day9 {
     public static void main(String[] args) {
-        final List<Long> numbers = ResourceLines.longList("/day9.txt");
+        final List<Long> numbers = ResourceLines.list("/day9.txt", Long::parseLong);
         final XMAS xmas = new XMAS(25);
 
         final long invalidNumber = part1(xmas, numbers);

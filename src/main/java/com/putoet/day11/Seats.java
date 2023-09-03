@@ -47,8 +47,8 @@ public class Seats {
     }
 
     private static long occupiedAround(Seats seats, Point point) {
-        final List<Point> adjacent = point.adjacend();
-        return adjacent.stream()
+        return Point.directions(false).stream()
+                .map(point::add)
                 .filter(p -> seats.grid.contains(p.x(), p.y()))
                 .filter(p -> seats.grid.get(p.x(), p.y()) == TAKEN_SEAT)
                 .count();

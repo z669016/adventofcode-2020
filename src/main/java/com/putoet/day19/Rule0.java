@@ -1,5 +1,7 @@
 package com.putoet.day19;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 import java.util.Set;
 
@@ -16,7 +18,7 @@ public class Rule0 extends ListRule {
     }
 
     @Override
-    public boolean isValid(String toValidate) {
+    public boolean isValid(@NotNull String toValidate) {
         init();
 
         if (toValidate.length() % rule42Length != 0)

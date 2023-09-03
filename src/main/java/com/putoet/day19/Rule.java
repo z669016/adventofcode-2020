@@ -1,6 +1,7 @@
 package com.putoet.day19;
 
 import com.putoet.utilities.Validator;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -73,7 +74,7 @@ public abstract class Rule implements Validator<String> {
     }
 
     @Override
-    public boolean isValid(String toValidate) {
+    public boolean isValid(@NotNull String toValidate) {
         return values().contains(toValidate);
     }
 }

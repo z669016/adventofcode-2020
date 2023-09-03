@@ -1,11 +1,12 @@
 package com.putoet.day4;
 
 import com.putoet.utilities.Validator;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.Set;
 
-public class PassportValidator implements Validator<Passport> {
+class PassportValidator implements Validator<Passport> {
     private static final Set<String> REQUIRED = Set.of(
             Passport.BYR,
             Passport.IYR,
@@ -17,8 +18,8 @@ public class PassportValidator implements Validator<Passport> {
     );
 
     @Override
-    public boolean isValid(Passport passport) {
-        final Map<String, String> fields = passport.fields();
+    public boolean isValid(@NotNull Passport passport) {
+        final var fields = passport.fields();
         return fields.keySet().containsAll(REQUIRED);
     }
 }

@@ -1,15 +1,17 @@
 package com.putoet.day4;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Batch {
-    public static List<Passport> of(List<String> lines) {
-        final List<Passport> passports = new ArrayList<>();
+class Batch {
+    public static List<Passport> of(@NotNull List<String> lines) {
+        final var passports = new ArrayList<Passport>();
 
-        final Iterator<String> iter = lines.iterator();
+        final var iter = lines.iterator();
         while (iter.hasNext()) {
-            final List<String> passportLines = passportLines(iter);
+            final var passportLines = passportLines(iter);
             passports.add(Passport.of(linesAsFields(passportLines)));
         }
 
@@ -17,11 +19,11 @@ public class Batch {
     }
 
     private static List<String> passportLines(Iterator<String> iter) {
-        final List<String> lines = new ArrayList<>();
+        final var lines = new ArrayList<String >();
 
         while (iter.hasNext()) {
-            String line = iter.next();
-            if (line.length() > 0)
+            var line = iter.next();
+            if (!line.isEmpty())
                 lines.add(line);
             else
                 return lines;

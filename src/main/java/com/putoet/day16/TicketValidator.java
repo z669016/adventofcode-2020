@@ -1,6 +1,7 @@
 package com.putoet.day16;
 
 import com.putoet.utilities.Validator;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Array;
 import java.util.*;
@@ -14,7 +15,7 @@ public class TicketValidator implements Validator<Ticket> {
     }
 
     @Override
-    public boolean isValid(Ticket toValidate) {
+    public boolean isValid(@NotNull Ticket toValidate) {
         return toValidate.fields().stream()
                     .allMatch(field -> validators.stream().anyMatch(validator -> validator.isValid(field)));
     }

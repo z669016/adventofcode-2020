@@ -2,6 +2,7 @@ package com.putoet.day16;
 
 import com.putoet.utilities.Validator;
 import org.javatuples.Pair;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -47,7 +48,7 @@ public class TicketFieldValidator implements Validator<Integer> {
     }
 
     @Override
-    public boolean isValid(Integer toValidate) {
+    public boolean isValid(@NotNull Integer toValidate) {
         return ranges.stream().anyMatch(range -> toValidate >= range.getValue0() && toValidate <= range.getValue1());
     }
 

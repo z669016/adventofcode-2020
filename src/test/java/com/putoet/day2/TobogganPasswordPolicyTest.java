@@ -1,7 +1,5 @@
 package com.putoet.day2;
 
-import com.putoet.day2.Password;
-import com.putoet.day2.TobogganPasswordPolicy;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,12 +12,12 @@ class TobogganPasswordPolicyTest {
 
     @Test
     void isValid() {
-        TobogganPasswordPolicy policy = TobogganPasswordPolicy.of(POLICY1);
+        TobogganPasswordPolicy policy = PasswordPolicy.of(POLICY1, TobogganPasswordPolicy.class);
         assertTrue(policy.isValid(Password.password(POLICY1)));
 
-        policy = TobogganPasswordPolicy.of(POLICY2);
+        policy = PasswordPolicy.of(POLICY2, TobogganPasswordPolicy.class);
         assertFalse(policy.isValid(Password.password(POLICY2)));
 
-        policy = TobogganPasswordPolicy.of(POLICY3);
+        policy = PasswordPolicy.of(POLICY3, TobogganPasswordPolicy.class);
         assertFalse(policy.isValid(Password.password(POLICY3)));
     }}

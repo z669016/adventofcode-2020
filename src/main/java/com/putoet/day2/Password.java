@@ -1,10 +1,10 @@
 package com.putoet.day2;
 
-public class Password {
-    public static String password(String line) {
-        assert line != null;
+import org.jetbrains.annotations.NotNull;
 
-        final int colon = line.indexOf(':');
+class Password {
+    public static String password(@NotNull String line) {
+        final var colon = line.indexOf(':');
         return line.substring(colon + 2);
     }
 }

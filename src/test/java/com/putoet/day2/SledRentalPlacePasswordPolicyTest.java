@@ -12,13 +12,13 @@ class SledRentalPlacePasswordPolicyTest {
 
     @Test
     void isValid() {
-        SledRentalPlacePasswordPolicy policy = SledRentalPlacePasswordPolicy.of(POLICY1);
+        SledRentalPlacePasswordPolicy policy = PasswordPolicy.of(POLICY1, SledRentalPlacePasswordPolicy.class);
         assertTrue(policy.isValid(Password.password(POLICY1)));
 
-        policy = SledRentalPlacePasswordPolicy.of(POLICY2);
+        policy = PasswordPolicy.of(POLICY2, SledRentalPlacePasswordPolicy.class);
         assertFalse(policy.isValid(Password.password(POLICY2)));
 
-        policy = SledRentalPlacePasswordPolicy.of(POLICY3);
+        policy = PasswordPolicy.of(POLICY3, SledRentalPlacePasswordPolicy.class);
         assertTrue(policy.isValid(Password.password(POLICY3)));
     }
 }

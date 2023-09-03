@@ -16,7 +16,7 @@ class InstructionTest {
 
     @Test
     void acc() {
-        final Instruction instruction = Instruction.of(0, "acc +3");
+        final var instruction = Instruction.of(0, "acc +3");
         instruction.accept(processor);
         assertEquals("acc", instruction.name());
         verify(processor, times(1)).getAccumulator();
@@ -27,7 +27,7 @@ class InstructionTest {
 
     @Test
     void nop() {
-        final Instruction instruction = Instruction.of(0, "nop +7");
+        final var instruction = Instruction.of(0, "nop +7");
         instruction.accept(processor);
         assertEquals("nop", instruction.name());
         verify(processor, times(0)).getAccumulator();
@@ -38,16 +38,12 @@ class InstructionTest {
 
     @Test
     void jmp() {
-        final Instruction instruction = Instruction.of(0, "jmp -5");
+        final var instruction = Instruction.of(0, "jmp -5");
         instruction.accept(processor);
         assertEquals("jmp", instruction.name());
         verify(processor, times(0)).getAccumulator();
         verify(processor, times(0)).setAccumulator(anyInt());
         verify(processor, times(1)).getIP();
         verify(processor, times(1)).setIP(-5);
-    }
-
-    @Test
-    void of() {
     }
 }

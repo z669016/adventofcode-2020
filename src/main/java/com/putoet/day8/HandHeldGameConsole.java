@@ -1,19 +1,18 @@
 package com.putoet.day8;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
-public class HandHeldGameConsole implements Processor {
+class HandHeldGameConsole implements Processor {
     private int accumulator;
     private int ip;
     private final List<Instruction> instructions;
     private final boolean[] executed;
-    private boolean verbose;
     private boolean terminateOnRepeat;
     private boolean terminatedOnRepeat;
 
-    public HandHeldGameConsole(List<Instruction> instructions) {
-        assert instructions != null;
-
+    public HandHeldGameConsole(@NotNull List<Instruction> instructions) {
         this.instructions = instructions;
         this.executed = new boolean[instructions.size()];
     }
@@ -24,9 +23,8 @@ public class HandHeldGameConsole implements Processor {
     }
 
     @Override
-    public Processor setAccumulator(int value) {
+    public void setAccumulator(int value) {
         accumulator = value;
-        return this;
     }
 
     @Override
@@ -35,32 +33,13 @@ public class HandHeldGameConsole implements Processor {
     }
 
     @Override
-    public Processor setIP(int value) {
+    public void setIP(int value) {
         ip = value;
-        return this;
-    }
-
-    @Override
-    public Processor enableVerbose() {
-        verbose = true;
-        return this;
-    }
-
-    @Override
-    public Processor disableVerbose() {
-        verbose = false;
-        return this;
     }
 
     @Override
     public Processor enableTerminateOnRepeat() {
         terminateOnRepeat = true;
-        return this;
-    }
-
-    @Override
-    public Processor disableTerminateOnRepeat() {
-        terminateOnRepeat = false;
         return this;
     }
 
@@ -74,23 +53,17 @@ public class HandHeldGameConsole implements Processor {
         ip = 0;
 
         while (ip < instructions.size()) {
-            final Instruction instruction = instructions.get(ip);
+            final var instruction = instructions.get(ip);
 
             if (terminateOnRepeat && executed[ip]) {
                 terminatedOnRepeat = true;
                 return;
             }
 
-            if (verbose)
-                System.out.print(this + " "  + instruction);
-
             executed[ip] = true;
             instruction.accept(this);
             if (!instruction.name().equals("jmp"))
                 ip++;
-
-            if (verbose)
-                System.out.println(" " + this);
         }
     }
 

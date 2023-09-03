@@ -9,10 +9,9 @@ class HandHeldGameConsoleTest {
 
     @Test
     void run() {
-        final Processor handHeldGameConsole =
+        final var handHeldGameConsole =
                 new HandHeldGameConsole(Compiler.compile(ResourceLines.list("/day8.txt")))
-                .enableTerminateOnRepeat()
-                .enableVerbose();
+                .enableTerminateOnRepeat();
 
         handHeldGameConsole.run();
 

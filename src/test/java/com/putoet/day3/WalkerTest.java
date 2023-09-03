@@ -5,8 +5,6 @@ import com.putoet.resources.ResourceLines;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WalkerTest {
@@ -14,13 +12,12 @@ class WalkerTest {
 
     @BeforeEach
     void setup() {
-        final List<String> lines = ResourceLines.list("/day3.txt");
-        treeArea = TreeArea.of(lines);
+        treeArea = TreeArea.of(ResourceLines.list("/day3.txt"));
     }
 
     @Test
     void walkAndCountTrees() {
-        final Walker walker = new Walker();
+        final var walker = new Walker();
         assertEquals(7, walker.walkAndCountTrees(Point.of(3, 1), treeArea));
     }
 }

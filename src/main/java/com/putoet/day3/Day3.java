@@ -2,16 +2,16 @@ package com.putoet.day3;
 
 import com.putoet.grid.Point;
 import com.putoet.resources.ResourceLines;
+import com.putoet.utils.Timer;
 
 import java.util.List;
 
 public class Day3 {
     public static void main(String[] args) {
-        final List<String> lines = ResourceLines.list("/day3.txt");
-        final TreeArea treeArea = TreeArea.of(lines);
+        final var treeArea = TreeArea.of(ResourceLines.list("/day3.txt"));
 
-        part1(treeArea);
-        part2(treeArea);
+        Timer.run(() -> part1(treeArea));
+        Timer.run(() -> part2(treeArea));
     }
 
     private static void part1(TreeArea treeArea) {
@@ -19,7 +19,7 @@ public class Day3 {
     }
 
     private static void part2(TreeArea treeArea) {
-        final List<Point> slopes = List.of(
+        final var slopes = List.of(
                 Point.of(1, 1),
                 Point.of(3, 1),
                 Point.of(5, 1),
@@ -33,8 +33,7 @@ public class Day3 {
         System.out.println("Multiplied trees " + multipliedTrees);
     }
 
-    public static int treesForSlope(TreeArea treeArea, Point slope) {
-        final Walker walker = new Walker();
-        return walker.walkAndCountTrees(slope, treeArea);
+    static int treesForSlope(TreeArea treeArea, Point slope) {
+        return new Walker().walkAndCountTrees(slope, treeArea);
     }
 }

@@ -1,10 +1,7 @@
 package com.putoet.day4;
 
 import com.putoet.resources.ResourceLines;
-import com.putoet.utilities.Validator;
 import com.putoet.utils.Timer;
-
-import java.util.List;
 
 public class Day4 {
     public static void main(String[] args) {

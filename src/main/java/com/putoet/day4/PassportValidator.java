@@ -3,7 +3,6 @@ package com.putoet.day4;
 import com.putoet.utilities.Validator;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Map;
 import java.util.Set;
 
 class PassportValidator implements Validator<Passport> {

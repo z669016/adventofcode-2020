@@ -13,17 +13,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PuzzlerTest {
     private Puzzler puzzler;
-    private List<Tile> tiles;
 
     @BeforeEach
     void setup() {
-        tiles = Tile.tiles(ResourceLines.list("/day20.txt"));
+        final var tiles = Tile.tiles(ResourceLines.list("/day20.txt"));
         puzzler = new Puzzler(tiles);
     }
 
     @Test
     void corners() {
-        final Set<Tile> corners = puzzler.corners();
+        final var corners = puzzler.corners();
 
         assertEquals(Set.of(1951, 3079, 2971, 1171),
                 corners.stream().mapToInt(Tile::id).boxed().collect(Collectors.toSet()));
@@ -33,10 +32,10 @@ class PuzzlerTest {
 
     @Test
     void grid() {
-        final Tile[][] tiles = puzzler.grid();
-        for (int y = 0; y <tiles.length; y++) {
-            for (int x = 0; x < tiles[0].length; x++) {
-                System.out.print(tiles[y][x].id());
+        final var tiles = puzzler.grid();
+        for (var tile : tiles) {
+            for (var x = 0; x < tiles[0].length; x++) {
+                System.out.print(tile[x].id());
                 System.out.print(" ");
             }
             System.out.println();
@@ -47,15 +46,15 @@ class PuzzlerTest {
 
     @Test
     void createImage() {
-        final Tile[][] tiles = puzzler.grid();
-        final char[][] image = Puzzler.createImage(tiles);
+        final var tiles = puzzler.grid();
+        final var image = Puzzler.createImage(tiles);
         assertEquals(2, Puzzler.seaMonsterCount(image));
     }
 
     @Test
     void paintSeaMonsters() {
-        final Tile[][] tiles = puzzler.grid();
-        final char[][] image = Puzzler.paintSeaMonsters(Puzzler.createImage(tiles));
+        final var tiles = puzzler.grid();
+        final var image = Puzzler.paintSeaMonsters(Puzzler.createImage(tiles));
 
         assertEquals(273L, GridUtils.count(image, '#'));
     }

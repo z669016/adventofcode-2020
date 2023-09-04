@@ -42,7 +42,7 @@ class TileTest {
 
     @Test
     void tiles() {
-        final List<Tile> tiles = Tile.tiles(ResourceLines.list("/day20.txt"));
+        final var tiles = Tile.tiles(ResourceLines.list("/day20.txt"));
 
         assertEquals(9, tiles.size());
         assertEquals(Set.of(1951, 2311, 3079, 2729, 1427, 2473, 2971, 1489, 1171),

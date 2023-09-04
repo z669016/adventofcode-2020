@@ -1,15 +1,17 @@
 package com.putoet.day23;
 
+import com.putoet.utils.Timer;
+
 public class Day23 {
     public static void main(String[] args) {
-        part1();
-        part2();
+        Timer.run(Day23::part1);
+        Timer.run(Day23::part2);
     }
 
     private static void part1() {
-        final CupCircle circle = new CupCircle("284573961");
+        final var circle = new CupCircle("284573961");
 
-        for (int i = 0; i < 100; i++) {
+        for (var i = 0; i < 100; i++) {
             circle.nextCircle();
         }
 
@@ -17,9 +19,9 @@ public class Day23 {
     }
 
     private static void part2() {
-        final CupCircle circle = new CupCircle("284573961", 1_000_000);
+        final var circle = new CupCircle("284573961", 1_000_000);
 
-        for (int idx = 0; idx < 10_000_000; idx++)
+        for (var idx = 0; idx < 10_000_000; idx++)
             circle.nextCircle();
 
         System.out.println("if you multiply their labels AFTER 1 together, you get " + circle.afterOneTwoValues());

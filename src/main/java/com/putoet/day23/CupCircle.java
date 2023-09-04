@@ -1,14 +1,16 @@
 package com.putoet.day23;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 
-public class CupCircle {
+class CupCircle {
     private final int[] init;
     private final int[] next;
     private int current;
     private final int max;
 
-    public CupCircle(String init, int length) {
+    public CupCircle(@NotNull String init, int length) {
         assert init.length() == 9;
         assert length >= init.length();
 
@@ -25,16 +27,16 @@ public class CupCircle {
         };
         next = new int[length];
 
-        for (int i = 0; i < length - 1; i++)
+        for (var i = 0; i < length - 1; i++)
             next[i] = i + 1;
         next[length - 1] = 0;
 
         current = 0;
 
-        max = length <= init.length() ? Arrays.stream(this.init).max().getAsInt() : length;
+        max = length == init.length() ? Arrays.stream(this.init).max().orElseThrow() : length;
     }
 
-    public CupCircle(String init) {
+    public CupCircle(@NotNull String init) {
         this(init, init.length());
     }
 
@@ -60,14 +62,13 @@ public class CupCircle {
     }
 
     public void nextCircle() {
-        int afterCurrent = next[current];
-        int[] from = new int[]{afterCurrent, next[afterCurrent], next[next[afterCurrent]]};
-        int[] selected = new int[]{valueAt(from[0]), valueAt(from[1]), valueAt(from[2])};
+        final var afterCurrent = next[current];
+        final var from = new int[]{afterCurrent, next[afterCurrent], next[next[afterCurrent]]};
+        final var selected = new int[]{valueAt(from[0]), valueAt(from[1]), valueAt(from[2])};
+        final var destination = destination(selected);
 
-        int destination = destination(selected);
-
-        int to = indexOf(destination);
-        int temp = next[current];
+        final var to = indexOf(destination);
+        final var temp = next[current];
         next[current] = next[from[2]];
         next[from[2]] = next[to];
         next[to] = temp;
@@ -77,10 +78,10 @@ public class CupCircle {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
+        final var sb = new StringBuilder();
         sb.append(valueAt(current));
 
-        int i = next[current];
+        var i = next[current];
         while (i != current) {
             sb.append(" ").append(valueAt(i));
             i = next[i];
@@ -89,7 +90,7 @@ public class CupCircle {
     }
 
     private int destination(int[] selected) {
-        int destination = valueAt(current) - 1;
+        var destination = valueAt(current) - 1;
         while (selected[0] == destination || selected[1] == destination || selected[2] == destination)
             destination--;
 
@@ -107,11 +108,11 @@ public class CupCircle {
     }
 
     public String afterOne() {
-        int one = indexOf(1);
-        int offset = next[one];
-        int count = 0;
+        var one = indexOf(1);
+        var offset = next[one];
+        var count = 0;
 
-        final StringBuilder sb = new StringBuilder();
+        final var sb = new StringBuilder();
         while (offset != one && count++ < 10) {
             sb.append(valueAt(offset));
             offset = next[offset];
@@ -120,11 +121,9 @@ public class CupCircle {
     }
 
     public long afterOneTwoValues() {
-        int one = indexOf(1);
-
-        int offset = next[one];
+        final var one = indexOf(1);
+        var offset = next[one];
         final long firstValue = valueAt(offset);
-
         offset = next[offset];
         final long secondValue = valueAt(offset);
 

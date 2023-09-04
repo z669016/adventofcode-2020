@@ -40,7 +40,7 @@ class CupCircleTest {
 
         assertEquals("92658374", cupCircle.afterOne());
 
-        for (int idx = 10; idx < 100; idx++)
+        for (var idx = 10; idx < 100; idx++)
             cupCircle.nextCircle();
 
         assertEquals("67384529", cupCircle.afterOne());
@@ -48,9 +48,9 @@ class CupCircleTest {
 
     @Test
     void bigCircle() {
-        final CupCircle circle = new CupCircle("389125467", 1_000_000);
+        final var circle = new CupCircle("389125467", 1_000_000);
 
-        for (int idx = 0; idx < 10_000_000; idx++)
+        for (var idx = 0; idx < 10_000_000; idx++)
             circle.nextCircle();
 
         assertEquals(149245887792L, circle.afterOneTwoValues());

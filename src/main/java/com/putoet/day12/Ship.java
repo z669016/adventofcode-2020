@@ -2,11 +2,12 @@ package com.putoet.day12;
 
 import com.putoet.grid.Point;
 import lombok.Data;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
 @Data
-public class Ship implements Consumer<CourseDirective> {
+class Ship implements Consumer<CourseDirective> {
     private Point location = Point.ORIGIN;
     private int direction = 0;
 
@@ -24,17 +25,15 @@ public class Ship implements Consumer<CourseDirective> {
     }
 
     @Override
-    public void accept(CourseDirective courseDirective) {
+    public void accept(@NotNull CourseDirective courseDirective) {
         move(courseDirective.command(), courseDirective.length());
     }
 
-    public void forward(CourseDirective courseDirective, WayPoint wayPoint) {
-        assert courseDirective != null && wayPoint != null;
-
+    public void forward(@NotNull CourseDirective courseDirective, @NotNull WayPoint wayPoint) {
         if (courseDirective.command() != Command.FORWARD)
             throw new IllegalArgumentException("cannot forward " + courseDirective);
 
-        int count = courseDirective.length();
+        var count = courseDirective.length();
         while (count > 0) {
             location = location.add(wayPoint.point());
             count--;

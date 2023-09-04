@@ -2,18 +2,17 @@ package com.putoet.day12;
 
 
 import com.putoet.grid.Point;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class WayPoint implements Consumer<CourseDirective> {
+class WayPoint implements Consumer<CourseDirective> {
     private Point point = Point.of(10, 1);
 
     public Point point() { return point; }
 
     @Override
-    public void accept(CourseDirective courseDirective) {
-        assert courseDirective != null;
-
+    public void accept(@NotNull CourseDirective courseDirective) {
         point = switch (courseDirective.command()) {
             case NORTH -> point.add(Point.of(0, courseDirective.length()));
             case EAST -> point.add(Point.of(courseDirective.length(), 0));

@@ -16,15 +16,27 @@ class CourseDirectiveTest {
 
     @Test
     void of() {
-        assertEquals("NORTH-3", N3.toString());
-        assertEquals("SOUTH-5", S5.toString());
-        assertEquals("EAST-7", E7.toString());
-        assertEquals("WEST-1", W1.toString());
-        assertEquals("LEFT-90", L90.toString());
-        assertEquals("RIGHT-180", R180.toString());
-        assertEquals("FORWARD-23", F23.toString());
+        assertEquals(Command.NORTH, N3.command());
+        assertEquals(3, N3.length());
 
-        assertThrows(AssertionError.class, () -> CourseDirective.of(null));
+        assertEquals(Command.SOUTH, S5.command());
+        assertEquals(5, S5.length());
+
+        assertEquals(Command.EAST, E7.command());
+        assertEquals(7, E7.length());
+
+        assertEquals(Command.WEST, W1.command());
+        assertEquals(1, W1.length());
+
+        assertEquals(Command.LEFT, L90.command());
+        assertEquals(90, L90.length());
+
+        assertEquals(Command.RIGHT, R180.command());
+        assertEquals(180, R180.length());
+
+        assertEquals(Command.FORWARD, F23.command());
+        assertEquals(23, F23.length());
+
         assertThrows(IllegalArgumentException.class, () -> CourseDirective.of("N"));
         assertThrows(IllegalArgumentException.class, () -> CourseDirective.of("3"));
     }

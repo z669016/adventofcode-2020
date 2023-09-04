@@ -1,6 +1,8 @@
 package com.putoet.day12;
 
-public enum Command {
+import org.jetbrains.annotations.NotNull;
+
+enum Command {
     FORWARD,
     NORTH,
     EAST,
@@ -9,8 +11,7 @@ public enum Command {
     LEFT,
     RIGHT;
 
-    public static Command of(String command) {
-        assert command != null;
+    public static Command of(@NotNull String command) {
         return switch (command) {
             case "F" -> FORWARD;
             case "N" -> NORTH;

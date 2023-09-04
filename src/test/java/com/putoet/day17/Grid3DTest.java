@@ -30,7 +30,7 @@ class Grid3DTest {
 
     @Test
     void evolve() {
-        Grid3D newGrid = grid.evolve();
+        var newGrid = grid.evolve();
         assertEquals(3L * (5 * 5), newGrid.size());
         assertEquals(11, newGrid.count(Grid3D.ACTIVE));
 

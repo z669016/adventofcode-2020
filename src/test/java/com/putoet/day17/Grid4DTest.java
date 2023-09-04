@@ -25,7 +25,7 @@ class Grid4DTest {
 
     @Test
     void evolve() {
-        Grid4D newGrid = grid.evolve();
+        var newGrid = grid.evolve();
         assertEquals(29, newGrid.count(Grid4D.ACTIVE));
 
         newGrid = newGrid.evolve();

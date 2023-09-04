@@ -16,8 +16,8 @@ class CryptoTest {
 
     @Test
     void loopSizeDoor() {
-        final long publicKey = 17_807_724L;
-        final long subjectNumber = 7L;
+        final var publicKey = 17_807_724L;
+        final var subjectNumber = 7L;
 
         assertEquals(11, Crypto.loopSize(subjectNumber,publicKey));
     }

@@ -15,9 +15,9 @@ class Day13Test {
 
     @Test
     void firstDeparture() {
-        final List<String> puzzleInput = ResourceLines.list(("/day13.txt"));
-        final int departureTime = Integer.parseInt(puzzleInput.get(0));
-        final Pair<Integer,Integer> bus = Day13.firstDeparture(departureTime, puzzleInput);
+        final var puzzleInput = ResourceLines.list(("/day13.txt"));
+        final var departureTime = Integer.parseInt(puzzleInput.get(0));
+        final var bus = Day13.firstDeparture(departureTime, puzzleInput);
 
         assertEquals(59, bus.getValue0());
         assertEquals(5, bus.getValue1());
@@ -25,16 +25,16 @@ class Day13Test {
 
     @Test
     void delays() {
-        final List<String> puzzleInput = ResourceLines.list(("/day13.txt"));
-        final List<String> busses = Arrays.stream(puzzleInput.get(1).split(",")).collect(Collectors.toList());
-        final List<Pair<Integer,Integer>> delays = Day13.delays(busses);
+        final var puzzleInput = ResourceLines.list(("/day13.txt"));
+        final var busses = Arrays.stream(puzzleInput.get(1).split(",")).collect(Collectors.toList());
+        final var delays = Day13.delays(busses);
 
-        final List<Pair<Integer,Integer>> answers = List.of(
-                new Pair<>(7, 0),
-                new Pair<>(13,1),
-                new Pair<>(59,4),
-                new Pair<>(31,6),
-                new Pair<>(19,7)
+        final var answers = List.of(
+                new Pair<>(7L, 0L),
+                new Pair<>(13L, 1L),
+                new Pair<>(59L, 4L),
+                new Pair<>(31L, 6L),
+                new Pair<>(19L, 7L)
         );
         IntStream.range(0, answers.size()).forEach(idx -> assertEquals(answers.get(idx), delays.get(idx)));
     }
@@ -48,14 +48,14 @@ class Day13Test {
         assertEquals(1202161486, Day13.findFirstMatchingTimestamp(delays("1789,37,47,1889")));
     }
 
-    List<Pair<Integer, Integer>> delays(String busses) {
-        return Day13.delays(Arrays.stream(busses.split(",")).collect(Collectors.toList()));
+    List<Pair<Long, Long>> delays(String busses) {
+        return Day13.delays(Arrays.stream(busses.split(",")).toList());
     }
 
     @Test
     void part2() {
-        final List<String> puzzleInput = ResourceLines.list(("/day13.txt"));
-        final List<String> busses = Arrays.stream(puzzleInput.get(1).split(",")).collect(Collectors.toList());
+        final var puzzleInput = ResourceLines.list(("/day13.txt"));
+        final var busses = Arrays.stream(puzzleInput.get(1).split(",")).collect(Collectors.toList());
         Day13.part2(busses);
     }
 }

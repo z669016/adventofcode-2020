@@ -1,20 +1,20 @@
 package com.putoet.day14;
 
 import com.putoet.resources.ResourceLines;
+import com.putoet.utils.Timer;
 
 import java.util.List;
 
 public class Day14 {
     public static void main(String[] args) {
-        final List<String> program = ResourceLines.list("/day14.txt");
-        final List<Instruction> instructions = Compiler.compile(program);
+        final var instructions = Compiler.compile(ResourceLines.list("/day14.txt"));
 
-        part1(instructions);
-        part2(instructions);
+        Timer.run(() -> part1(instructions));
+        Timer.run(() -> part2(instructions));
     }
 
     private static void part1(List<Instruction> instructions) {
-        final Memory memory = new MemoryDecoder();
+        final var memory = new MemoryDecoder();
         memory.run(instructions);
 
         System.out.println("the sum of all values left in memory after it completes is " +
@@ -22,7 +22,7 @@ public class Day14 {
     }
 
     private static void part2(List<Instruction> instructions) {
-        final Memory memory = new MemoryDecoderV2();
+        final var memory = new MemoryDecoderV2();
         memory.run(instructions);
 
         System.out.println("the sum of all values left in memory V2 after it completes is " +

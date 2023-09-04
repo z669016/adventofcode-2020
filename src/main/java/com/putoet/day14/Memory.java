@@ -1,10 +1,12 @@
 package com.putoet.day14;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Collection;
 import java.util.List;
 
-public interface Memory {
-    void mask(String mask);
+interface Memory {
+    void mask(@NotNull String mask);
 
     long get(long offset);
 
@@ -12,9 +14,7 @@ public interface Memory {
 
     Collection<Long> values();
 
-    void run(List<Instruction> instructions);
+    void run(@NotNull List<Instruction> instructions);
 
-    void run(Instruction instruction);
-
-    void dump();
+    void run(@NotNull Instruction instruction);
 }

@@ -2,7 +2,7 @@ package com.putoet.day14;
 
 import java.util.function.Consumer;
 
-public abstract class Instruction implements Consumer<Memory> {
+abstract class Instruction implements Consumer<Memory> {
     private final String name;
 
     protected Instruction(String name) {

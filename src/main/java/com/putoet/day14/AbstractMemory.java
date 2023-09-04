@@ -1,8 +1,10 @@
 package com.putoet.day14;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
-public abstract class AbstractMemory implements Memory {
+abstract class AbstractMemory implements Memory {
     protected static final long MAX_MASK = 0xfffffffffL;
 
     protected final Map<Long, Long> values = new HashMap<>();
@@ -13,7 +15,7 @@ public abstract class AbstractMemory implements Memory {
     }
 
     @Override
-    public void mask(String mask) {
+    public void mask(@NotNull String mask) {
         this.mask = mask;
     }
 
@@ -29,19 +31,13 @@ public abstract class AbstractMemory implements Memory {
     }
 
     @Override
-    public void run(List<Instruction> instructions) {
+    public void run(@NotNull List<Instruction> instructions) {
         instructions.forEach(this::run);
     }
 
     @Override
-    public void run(Instruction instruction) {
+    public void run(@NotNull Instruction instruction) {
         instruction.accept(this);
     }
 
-    @Override
-    public void dump() {
-        values.entrySet().stream()
-                .sorted(Comparator.comparingLong(Map.Entry::getKey))
-                .forEach(entry -> System.out.println("mem[" + entry.getKey() + "] = " + entry.getValue()));
-    }
 }

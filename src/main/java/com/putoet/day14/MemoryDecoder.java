@@ -1,19 +1,19 @@
 package com.putoet.day14;
 
-public class MemoryDecoder extends AbstractMemory {
+class MemoryDecoder extends AbstractMemory {
 
     @Override
     public long set(long offset, long value) {
         assert offset >= 0;
 
-        final long maskedValue = mask(value);
+        final var maskedValue = mask(value);
         values.put(offset, maskedValue);
 
         return maskedValue;
     }
 
     private long mask(long value) {
-        for (int idx = 0; idx < mask.length(); idx++) {
+        for (var idx = 0; idx < mask.length(); idx++) {
             value = switch (mask.charAt(35 - idx)) {
                 case '0' -> value & (MAX_MASK - bit(idx));
                 case '1' -> value | bit(idx);

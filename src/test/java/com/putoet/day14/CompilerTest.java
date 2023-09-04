@@ -3,15 +3,13 @@ package com.putoet.day14;
 import com.putoet.resources.ResourceLines;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class CompilerTest {
     @Test
     void compile() {
-        final List<String> program = ResourceLines.list("/day14.txt");
-        final List<Instruction> instructions = Compiler.compile(program);
+        final var program = ResourceLines.list("/day14.txt");
+        final var instructions = Compiler.compile(program);
 
         assertEquals(4, instructions.size());
         assertEquals("mask = XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X", instructions.get(0).toString());

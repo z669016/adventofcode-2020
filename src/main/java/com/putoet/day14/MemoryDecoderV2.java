@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MemoryDecoderV2 extends AbstractMemory {
+class MemoryDecoderV2 extends AbstractMemory {
 
     @Override
     public long set(long offset, long value) {
         assert offset >= 0;
 
-        final List<Long> offsets = addresses(offset);
+        final var offsets = addresses(offset);
         offsets.forEach(address -> values.put(address, value));
 
         return value;
@@ -19,7 +19,7 @@ public class MemoryDecoderV2 extends AbstractMemory {
     private List<Long> addresses(long offset) {
         List<String> addresses = new ArrayList<>();
 
-        for (int idx = 0; idx < mask.length(); idx++) {
+        for (var idx = 0; idx < mask.length(); idx++) {
             switch (mask.charAt(idx)) {
                 case '0' -> addresses = append(addresses, bit(35 - idx, offset));
                 case '1' -> addresses = append(addresses, '1');
@@ -27,15 +27,10 @@ public class MemoryDecoderV2 extends AbstractMemory {
             }
         }
 
-//        System.out.printf("%36s%n", Long.toBinaryString(offset));
-//        System.out.println(mask);
-//        addresses.forEach(System.out::println);
-//        System.out.println();
-
         return addresses.stream()
                 .mapToLong(address -> Long.parseLong(address, 2))
                 .boxed()
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private char bit(int idx, long offset) {
@@ -47,19 +42,17 @@ public class MemoryDecoderV2 extends AbstractMemory {
             return addresses;
 
         if (bits.length == 1) {
-            if (addresses.size() == 0) {
+            if (addresses.isEmpty())
                 addresses.add(String.valueOf(bits[0]));
-            } else {
-                for (int idx = 0; idx < addresses.size(); idx++) {
-                    addresses.set(idx, addresses.get(idx) + bits[0]);
-                }
-            }
+            else
+                addresses.replaceAll(s -> s + bits[0]);
+
             return addresses;
         }
 
-        final List<String> newAddresses = new ArrayList<>();
-        for (char bit : bits) {
-            if (addresses.size() == 0) {
+        final var newAddresses = new ArrayList<String>();
+        for (var bit : bits) {
+            if (addresses.isEmpty()) {
                 newAddresses.add(String.valueOf(bit));
             } else {
                 for (String address : addresses) {

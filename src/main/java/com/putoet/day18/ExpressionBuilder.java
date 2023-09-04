@@ -1,27 +1,27 @@
 package com.putoet.day18;
 
-import org.javatuples.Pair;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 import java.util.function.Supplier;
 
-public class ExpressionBuilder {
+class ExpressionBuilder {
     protected final List<Operand> operands = new ArrayList<>();
     protected final List<Operator> operators = new ArrayList<>();
 
-    public static Expression of(String line) {
+    public static Expression of(@NotNull String line) {
         return of(line, ExpressionBuilder::new);
     }
 
-    protected static Expression of(String line, Supplier<ExpressionBuilder> supplier) {
-        final Stack<ExpressionBuilder> builders = new Stack<>();
-        final Tokenizer tokenizer = new Tokenizer(line);
+    protected static Expression of(@NotNull String line, @NotNull Supplier<ExpressionBuilder> supplier) {
+        final var builders = new Stack<ExpressionBuilder>();
+        final var tokenizer = new Tokenizer(line);
 
-        ExpressionBuilder builder = supplier.get();
+        var builder = supplier.get();
         while (tokenizer.hasMoreTokens()) {
-            final Pair<Tokenizer.Type, String> token = tokenizer.next();
+            final var token = tokenizer.next();
 
             switch (token.getValue0()) {
                 case OPEN -> {
@@ -29,7 +29,7 @@ public class ExpressionBuilder {
                     builder = builder.open();
                 }
                 case CLOSE -> {
-                    final Expression expression = builder.close();
+                    final var expression = builder.close();
                     builder = builders.pop();
                     builder.operand(expression);
                 }
@@ -41,12 +41,12 @@ public class ExpressionBuilder {
         return builder.build();
     }
 
-    public ExpressionBuilder operator(Operator operator) {
+    public ExpressionBuilder operator(@NotNull Operator operator) {
         operators.add(operator);
         return this;
     }
 
-    public ExpressionBuilder operator(String operator) {
+    public ExpressionBuilder operator(@NotNull String operator) {
         operators.add(Operator.of(operator));
         return this;
     }
@@ -57,12 +57,12 @@ public class ExpressionBuilder {
         return this;
     }
 
-    public ExpressionBuilder operand(Operand operand) {
+    public ExpressionBuilder operand(@NotNull Operand operand) {
         operands.add(operand);
         return this;
     }
 
-    public ExpressionBuilder operand(String operand) {
+    public ExpressionBuilder operand(@NotNull String operand) {
         operands.add(new Value(Long.parseLong(operand)));
         return this;
     }

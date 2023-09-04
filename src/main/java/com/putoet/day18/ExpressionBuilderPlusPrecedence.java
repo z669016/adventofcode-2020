@@ -1,7 +1,9 @@
 package com.putoet.day18;
 
-public class ExpressionBuilderPlusPrecedence extends ExpressionBuilder {
-    public static Expression of(String line) {
+import org.jetbrains.annotations.NotNull;
+
+class ExpressionBuilderPlusPrecedence extends ExpressionBuilder {
+    public static Expression of(@NotNull String line) {
         return ExpressionBuilder.of(line, ExpressionBuilderPlusPrecedence::new);
     }
 
@@ -11,15 +13,15 @@ public class ExpressionBuilderPlusPrecedence extends ExpressionBuilder {
     }
 
     @Override
-    public ExpressionBuilder operand(Operand operand) {
+    public ExpressionBuilder operand(@NotNull Operand operand) {
         operands.add(operand);
 
-        final int lastOperatorIndex = operators.size() - 1;
+        final var lastOperatorIndex = operators.size() - 1;
         if (lastOperatorIndex > -1 && operators.get(lastOperatorIndex) instanceof TimesOperator) {
             return this;
         }
 
-        final int lastOperandIndex = operands.size() - 1;
+        final var lastOperandIndex = operands.size() - 1;
         if (lastOperandIndex < 2)
             return this;
 
@@ -34,7 +36,7 @@ public class ExpressionBuilderPlusPrecedence extends ExpressionBuilder {
     }
 
     @Override
-    public ExpressionBuilder operand(String operand) {
+    public ExpressionBuilder operand(@NotNull String operand) {
         return operand(new Value(Long.parseLong(operand)));
     }
 }

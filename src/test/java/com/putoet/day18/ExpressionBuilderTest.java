@@ -8,8 +8,8 @@ class ExpressionBuilderTest {
 
     @Test
     void simpleAdd() {
-        ExpressionBuilder builder = new ExpressionBuilder();
-        final Expression expression = builder
+        final var builder = new ExpressionBuilder();
+        final var expression = builder
                 .operand(new Value(3))
                 .operator(Operator.of('+'))
                 .operand(new Value(5))
@@ -21,8 +21,8 @@ class ExpressionBuilderTest {
 
     @Test
     void complicated() {
-        ExpressionBuilder builder = new ExpressionBuilder();
-        final Expression expression = builder // 3+ 5 * 2 + 7
+        final var builder = new ExpressionBuilder();
+        final var expression = builder // 3+ 5 * 2 + 7
                 .operand(new Value(3))
                 .operator(Operator.of('+'))
                 .operand(new Value(5))
@@ -38,8 +38,8 @@ class ExpressionBuilderTest {
 
     @Test
     void complex() {
-        ExpressionBuilder builder = new ExpressionBuilder();
-        final Expression expression = builder // 1 + (2 * 3) + (4 * (5 + 6))
+        final var builder = new ExpressionBuilder();
+        final var expression = builder // 1 + (2 * 3) + (4 * (5 + 6))
                 .operand(1)
                 .operator('+')
                 .operand(builder.open()
@@ -65,7 +65,7 @@ class ExpressionBuilderTest {
 
     @Test
     void of() {
-        final Expression expression = ExpressionBuilder.of("1 + (2 * 3) + (4 * (5 + 6))");
+        final var expression = ExpressionBuilder.of("1 + (2 * 3) + (4 * (5 + 6))");
         System.out.println(expression);
         assertEquals(51, expression.get());
     }

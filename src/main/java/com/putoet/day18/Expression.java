@@ -1,16 +1,8 @@
 package com.putoet.day18;
 
-public class Expression implements Operand {
-    private final Operand left;
-    private final Operator operator;
-    private final Operand right;
+import org.jetbrains.annotations.NotNull;
 
-    public Expression(Operand left, Operator operator, Operand right) {
-        this.left = left;
-        this.operator = operator;
-        this.right = right;
-    }
-
+record Expression(@NotNull Operand left, @NotNull Operator operator, @NotNull Operand right) implements Operand {
     @Override
     public Long get() {
         return operator.apply(left.get(), right.get());
@@ -18,6 +10,6 @@ public class Expression implements Operand {
 
     @Override
     public String toString() {
-        return "(" + left.toString() + operator.toString()+ right.toString() + ")";
+        return "(" + left + operator + right + ")";
     }
 }

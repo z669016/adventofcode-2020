@@ -9,10 +9,10 @@ class TokenizerTest {
 
     @Test
     void next() {
-        final Tokenizer tokenizer = new Tokenizer("1 + (2 * 3) + (4 * (5 + 6))");
+        final var tokenizer = new Tokenizer("1 + (2 * 3) + (4 * (5 + 6))");
 
         assertTrue(tokenizer.hasMoreTokens());
-        Pair<Tokenizer.Type,String> token = tokenizer.next();
+        var token = tokenizer.next();
         test(token, Tokenizer.Type.VALUE, "1");
 
         assertTrue(tokenizer.hasMoreTokens());

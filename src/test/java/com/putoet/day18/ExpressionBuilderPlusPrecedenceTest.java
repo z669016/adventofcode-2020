@@ -8,7 +8,7 @@ class ExpressionBuilderPlusPrecedenceTest {
 
     @Test
     void samples() {
-        Expression expression = ExpressionBuilderPlusPrecedence.of("1 + (2 * 3) + (4 * (5 + 6))");
+        var expression = ExpressionBuilderPlusPrecedence.of("1 + (2 * 3) + (4 * (5 + 6))");
         System.out.println(expression);
         assertEquals(51, expression.get());
 

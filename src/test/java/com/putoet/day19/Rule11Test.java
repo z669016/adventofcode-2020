@@ -13,8 +13,8 @@ class Rule11Test {
 
     @BeforeEach
     void setup() {
-        final PuzzleInput puzzleInput = new PuzzleInput(ResourceLines.list("/day19-2.txt"));
-        final Rules rules = puzzleInput.rules();
+        final var puzzleInput = new PuzzleInput(ResourceLines.list("/day19-2.txt"));
+        final var rules = puzzleInput.rules();
         rule = new Rule11(11, rules, List.of(42, 31), List.of(42, 11, 31));
     }
 

@@ -5,14 +5,14 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Set;
 
-public class Rule0 extends ListRule {
+class Rule0 extends ListRule {
     private final Rules rules;
     private Rule rule8;
     private Rule rule11;
     private Rule rule42;
     private int rule42Length;
 
-    public Rule0(int id, Rules rules, List<Integer> idList) {
+    public Rule0(int id, @NotNull Rules rules, @NotNull List<Integer> idList) {
         super(id, rules, idList);
         this.rules = rules;
     }
@@ -24,11 +24,11 @@ public class Rule0 extends ListRule {
         if (toValidate.length() % rule42Length != 0)
             return false;
 
-        boolean match = false;
-        int length = rule42Length;
+        var match = false;
+        var length = rule42Length;
         while (!match && length < toValidate.length()) {
-            final String left = toValidate.substring(0, length);
-            final String right = toValidate.substring(length);
+            final var left = toValidate.substring(0, length);
+            final var right = toValidate.substring(length);
             match = rule8.isValid(left) && rule11.isValid(right);
             length += rule42Length;
         }
@@ -43,7 +43,7 @@ public class Rule0 extends ListRule {
             rule11 = rules.get(11);
             rule42 = rules.get(42);
 
-            rule42Length = rule42.values().stream().findFirst().get().length();
+            rule42Length = rule42.values().stream().findFirst().orElseThrow().length();
         }
     }
 

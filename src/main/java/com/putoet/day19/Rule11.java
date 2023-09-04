@@ -29,14 +29,14 @@ public class Rule11 extends ChoiceRule {
             center = center(toValidate);
         }
 
-        return toValidate.length() == 0;
+        return toValidate.isEmpty();
     }
 
     private void init() {
         // Rule 11: 42 31 | 42 11 31
         if (rule11 == null) {
             rule11 = Rule.of(rules, "11: 42 31");
-            rule11Length = rule11.values().stream().findFirst().get().length();
+            rule11Length = rule11.values().stream().findFirst().orElseThrow().length();
         }
     }
 

@@ -26,13 +26,13 @@ public class Rule8 extends ChoiceRule {
             toValidate = toValidate.substring(rule42Length);
         }
 
-        return toValidate.length() == 0;
+        return toValidate.isEmpty();
     }
 
     private void init() {
         // Rule 8: 42 | 42 8
         rule42 = rules.get(42);
-        rule42Length = rule42.values().stream().findFirst().get().length();
+        rule42Length = rule42.values().stream().findFirst().orElseThrow().length();
     }
 
     @Override

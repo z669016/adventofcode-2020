@@ -15,7 +15,7 @@ class Rule0Test {
     @BeforeEach
     void setup() {
         puzzleInput = new PuzzleInput(ResourceLines.list("/day19-2.txt"));
-        final Rules rules = puzzleInput.rules();
+        final var rules = puzzleInput.rules();
         rules.put(8, new Rule8(8, rules, List.of(42), List.of(42, 8)));
         rules.put(11, new Rule11(11, rules, List.of(42, 31), List.of(42, 11, 31)));
 
@@ -32,7 +32,6 @@ class Rule0Test {
     void sample() {
         final long match = puzzleInput.messages().stream()
                 .filter(rule::isValid)
-                .peek(System.out::println)
                 .count();
         assertEquals(12, match);
     }

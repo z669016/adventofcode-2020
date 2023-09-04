@@ -8,31 +8,21 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public abstract class Rule implements Validator<String> {
+abstract class Rule implements Validator<String> {
     private static final Pattern VALUE_RULE = Pattern.compile("^(\\d+): \"([a-z])\"$");
     private static final Pattern LIST_RULE = Pattern.compile("^(\\d+): ((\\d+)( \\d+)*)$");
     private static final Pattern CHOICE_RULE = Pattern.compile("^(\\d+): ((\\d+)( \\d+)*) \\| ((\\d+)( \\d+)*)$");
-
-    private final int id;
-    protected Set<String> values;
-
-    protected Rule(int id) {
-        this.id = id;
-    }
-
-    public static Rule of(Rules rules, String rule) {
-        assert rule != null;
-
-        Matcher matcher = LIST_RULE.matcher(rule);
+    public static Rule of(@NotNull Rules rules, @NotNull String rule) {
+        var matcher = LIST_RULE.matcher(rule);
         if (matcher.matches()) {
-            final List<Integer> idList = asIntList(matcher.group(2));
+            final var idList = asIntList(matcher.group(2));
             return new ListRule(Integer.parseInt(matcher.group(1)), rules, idList);
         }
 
         matcher = CHOICE_RULE.matcher(rule);
         if (matcher.matches()) {
-            final List<Integer> one = asIntList(matcher.group(2));
-            final List<Integer> two = asIntList(matcher.group(5));
+            final var one = asIntList(matcher.group(2));
+            final var two = asIntList(matcher.group(5));
             return new ChoiceRule(Integer.parseInt(matcher.group(1)), rules, one, two);
         }
 
@@ -46,7 +36,14 @@ public abstract class Rule implements Validator<String> {
     private static List<Integer> asIntList(String text) {
         return Arrays.stream(text.split(" "))
                 .map(Integer::parseInt)
-                .collect(Collectors.toList());
+                .toList();
+    }
+
+    private final int id;
+    protected Set<String> values;
+
+    protected Rule(int id) {
+        this.id = id;
     }
 
     protected Set<String> values() {

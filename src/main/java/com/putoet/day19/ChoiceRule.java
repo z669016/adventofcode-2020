@@ -1,16 +1,16 @@
 package com.putoet.day19;
 
-import java.util.Collection;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-public class ChoiceRule extends Rule {
+class ChoiceRule extends Rule {
     protected final ListRule one;
     protected final ListRule two;
 
-    public ChoiceRule(int id, Rules rules, List<Integer> idListOne, List<Integer> idListTwo) {
+    public ChoiceRule(int id, @NotNull Rules rules, @NotNull List<Integer> idListOne, @NotNull List<Integer> idListTwo) {
         super(id);
         this.one = new ListRule(id, rules, idListOne);
         this.two = new ListRule(id, rules, idListTwo);
@@ -18,7 +18,7 @@ public class ChoiceRule extends Rule {
 
     @Override
     protected Set<String> createValues() {
-        final Set<String> set = new HashSet<>(one.values());
+        final var set = new HashSet<>(one.values());
         set.addAll(two.values());
 
         return set;

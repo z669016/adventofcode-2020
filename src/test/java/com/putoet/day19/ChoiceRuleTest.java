@@ -11,12 +11,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class ChoiceRuleTest {
-    private Rules rules;
     private ChoiceRule rule;
 
     @BeforeEach
     void setup() {
-        rules = mock(Rules.class);
+        var rules = mock(Rules.class);
         when(rules.get(0)).thenReturn(new ValueRule(0, "a"));
         when(rules.get(1)).thenReturn(new ValueRule(1, "b"));
         when(rules.get(2)).thenReturn(new ValueRule(2, "c"));

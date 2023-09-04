@@ -24,14 +24,13 @@ class RuleTest {
 
     @Test
     void ofError() {
-        assertThrows(AssertionError.class, () -> Rule.of(rules, null));
         assertThrows(IllegalArgumentException.class, () -> Rule.of(rules, ""));
         assertThrows(IllegalArgumentException.class, () -> Rule.of(rules, "a: \"a\""));
     }
 
     @Test
     void ofValue() {
-        final Rule rule = Rule.of(rules, "0: \"a\"");
+        final var rule = Rule.of(rules, "0: \"a\"");
 
         assertEquals(0, rule.id());
         assertTrue(rule instanceof ValueRule);
@@ -40,7 +39,7 @@ class RuleTest {
 
     @Test
     void ofList() {
-        final Rule rule = Rule.of(rules, "0: 1 2 33");
+        final var rule = Rule.of(rules, "0: 1 2 33");
 
         assertEquals(0, rule.id());
         assertTrue(rule instanceof ListRule);
@@ -49,7 +48,7 @@ class RuleTest {
 
     @Test
     void ofChoice() {
-        final Rule rule = Rule.of(rules, "0: 1 2 | 33");
+        final var rule = Rule.of(rules, "0: 1 2 | 33");
 
         assertEquals(0, rule.id());
         assertTrue(rule instanceof ChoiceRule);

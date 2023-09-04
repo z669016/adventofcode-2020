@@ -2,7 +2,6 @@ package com.putoet.day14;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 class MemoryDecoderV2 extends AbstractMemory {
 

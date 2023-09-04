@@ -1,19 +1,20 @@
 package com.putoet.day22;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class RecursiveCombat extends Combat {
+class RecursiveCombat extends Combat {
     private final Set<String> previousRounds = new HashSet<>();
     private Player winner;
 
-    public RecursiveCombat(List<Integer> cards1, List<Integer> cards2) {
+    public RecursiveCombat(@NotNull List<Integer> cards1, @NotNull List<Integer> cards2) {
         super(cards1, cards2);
     }
 
     public void play() {
-        int subId = 0;
         while (player1.hasNext() && player2.hasNext()) {
             // if this config (the combination of cards for player 1 AND player 2) was seen before, player1 wins.
             // This is to prevent the game continues indefinitely
@@ -24,14 +25,14 @@ public class RecursiveCombat extends Combat {
 
             rounds++;
 
-            int card1 = player1.next();
-            int card2 = player2.next();
+            var card1 = player1.next();
+            var card2 = player2.next();
 
             // If the card value for both players match the number of cards in their deck, start a sub game
             if (card1 <= player1.cards().size() && card2 <= player2.cards().size()) {
 
                 // in a sub game, each player starts with the number of cards that equals the drawn cards value
-                final RecursiveCombat subGame =
+                final var subGame =
                         new RecursiveCombat(player1.cards().subList(0, card1), player2.cards().subList(0, card2));
 
                 subGame.play();

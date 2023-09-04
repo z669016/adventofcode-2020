@@ -1,13 +1,15 @@
 package com.putoet.day22;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 import java.util.stream.IntStream;
 
-public class Player implements Iterator<Integer> {
+class Player implements Iterator<Integer> {
     private final int id;
     private final LinkedList<Integer> cards;
 
-    public Player(int id, List<Integer> cards) {
+    public Player(int id, @NotNull List<Integer> cards) {
         this.id = id;
         this.cards = new LinkedList<>(cards);
     }
@@ -17,7 +19,7 @@ public class Player implements Iterator<Integer> {
     }
 
     public boolean lost() {
-        return cards.size() == 0;
+        return cards.isEmpty();
     }
 
     public void add(int card) {
@@ -25,7 +27,7 @@ public class Player implements Iterator<Integer> {
     }
 
     public long score() {
-        final int size = cards.size();
+        final var size = cards.size();
         return IntStream.range(0, size)
                 .map(index -> cards.get(index) * (size - index))
                 .sum();

@@ -1,14 +1,14 @@
 package com.putoet.day22;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
-public class Combat {
+class Combat {
     protected final Player player1, player2;
     protected int rounds;
 
-    public Combat(List<Integer> cards1, List<Integer> cards2) {
-        assert cards1 != null && cards2 != null;
-
+    public Combat(@NotNull List<Integer> cards1, @NotNull List<Integer> cards2) {
         player1 = new Player(1, cards1);
         player2 = new Player(2, cards2);
     }
@@ -16,8 +16,8 @@ public class Combat {
     public void play() {
         while (player1.hasNext() && player2.hasNext()) {
             rounds++;
-            int card1 = player1.next();
-            int card2 = player2.next();
+            var card1 = player1.next();
+            var card2 = player2.next();
 
             if (card1 > card2) {
                 player1.add(card1);

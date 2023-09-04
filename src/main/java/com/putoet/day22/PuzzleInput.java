@@ -1,36 +1,32 @@
 package com.putoet.day22;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class PuzzleInput {
-    private List<Integer> player1Cards;
-    private List<Integer> player2Cards;
+record PuzzleInput(List<Integer> player1Cards, List<Integer> player2Cards) {
 
-    public PuzzleInput(List<String> lines) {
-        assert lines != null;
+    public static PuzzleInput of(@NotNull List<String> lines) {
+        List<Integer> player1Cards = null;
 
-        int player;
-        List<Integer> list = new ArrayList<>();
-        for (String line : lines) {
+        var list = new ArrayList<Integer>();
+
+        for (var line : lines) {
             if ("Player 1:".equals(line)) {
-                player = 1;
                 continue;
             }
 
             if ("Player 2:".equals(line)) {
                 player1Cards = list;
                 list = new ArrayList<>();
-                player = 2;
                 continue;
             }
 
-            if (line.length() > 0)
+            if (!line.isEmpty())
                 list.add(Integer.parseInt(line));
         }
-        player2Cards = list;
-    }
 
-    public List<Integer> player1Cards() { return player1Cards; }
-    public List<Integer> player2Cards() { return player2Cards; }
+        return new PuzzleInput(player1Cards, list);
+    }
 }

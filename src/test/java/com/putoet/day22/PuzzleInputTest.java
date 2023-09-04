@@ -11,7 +11,7 @@ class PuzzleInputTest {
 
     @Test
     void playerXCards() {
-        final PuzzleInput puzzleInput = new PuzzleInput(ResourceLines.list("/day22.txt"));
+        final PuzzleInput puzzleInput = PuzzleInput.of(ResourceLines.list("/day22.txt"));
         assertEquals(List.of(9, 2, 6, 3, 1), puzzleInput.player1Cards());
         assertEquals(List.of(5, 8, 4, 7, 10), puzzleInput.player2Cards());
     }

@@ -18,7 +18,7 @@ class PuzzleInputTest {
 
     @Test
     void ticketFieldValidators() {
-        final List<TicketFieldValidator> ticketFieldValidators = puzzleInput.ticketFieldValidators();
+        final var ticketFieldValidators = puzzleInput.ticketFieldValidators();
         assertEquals(3, ticketFieldValidators.size());
         assertEquals("class", ticketFieldValidators.get(0).fieldName());
         assertEquals("row", ticketFieldValidators.get(1).fieldName());
@@ -27,14 +27,14 @@ class PuzzleInputTest {
 
     @Test
     void myTicket() {
-        final Ticket ticket = puzzleInput.myTicket();
+        final var ticket = puzzleInput.myTicket();
         assertEquals("myTicket", ticket.name());
         assertEquals(List.of(7, 1, 14), ticket.fields());
     }
 
     @Test
     void nearbyTicket() {
-        final List<Ticket> tickets = puzzleInput.nearbyTickets();
+        final var tickets = puzzleInput.nearbyTickets();
         assertEquals(4, tickets.size());
         tickets.forEach(ticket -> assertTrue(ticket.name().startsWith("ticket-")));
     }

@@ -13,13 +13,13 @@ class TicketFieldValidatorTest {
 
     @BeforeEach
     void setup() {
-        final PuzzleInput puzzleInput = new PuzzleInput(ResourceLines.list("/day16.txt"));
+        final var puzzleInput = new PuzzleInput(ResourceLines.list("/day16.txt"));
         validators = puzzleInput.ticketFieldValidators();
     }
 
     @Test
     void isValid() {
-        final TicketFieldValidator classValidator = validators.get(0);
+        final var classValidator = validators.get(0);
         assertEquals("class", classValidator.fieldName());
         assertTrue(classValidator.isValid(1));
         assertTrue(classValidator.isValid(3));

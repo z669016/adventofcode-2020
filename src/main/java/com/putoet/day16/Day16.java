@@ -1,27 +1,28 @@
 package com.putoet.day16;
 
 import com.putoet.resources.ResourceLines;
+import com.putoet.utils.Timer;
 
 import java.util.List;
 import java.util.stream.IntStream;
 
 public class Day16 {
     public static void main(String[] args) {
-        final PuzzleInput puzzleInput = new PuzzleInput(ResourceLines.list("/day16.txt"));
+        final var puzzleInput = new PuzzleInput(ResourceLines.list("/day16.txt"));
 
-        part1(puzzleInput);
-        part2(puzzleInput);
+        Timer.run(() -> part1(puzzleInput));
+        Timer.run(() -> part2(puzzleInput));
     }
 
     private static void part1(PuzzleInput puzzleInput) {
-        final List<Ticket> tickets = puzzleInput.nearbyTickets();
-        final int errorRate = errorRate(puzzleInput, tickets);
+        final var tickets = puzzleInput.nearbyTickets();
+        final var errorRate = errorRate(puzzleInput, tickets);
 
         System.out.println("ticket scanning error rate is " + errorRate);
     }
 
-    protected static int errorRate(PuzzleInput puzzleInput, List<Ticket> tickets) {
-        final List<TicketFieldValidator> validators = puzzleInput.ticketFieldValidators();
+    static int errorRate(PuzzleInput puzzleInput, List<Ticket> tickets) {
+        final var validators = puzzleInput.ticketFieldValidators();
 
         return tickets.stream()
                 .mapToInt(ticket -> ticket.fields().stream()
@@ -32,12 +33,12 @@ public class Day16 {
     }
 
     private static void part2(PuzzleInput puzzleInput) {
-        final List<Ticket> tickets = puzzleInput.nearbyTickets();
-        final TicketValidator validator = new TicketValidator(puzzleInput.ticketFieldValidators());
-        final List<Ticket> validTickets = validator.validTickets(tickets);
-        final List<String> fieldNames = validator.fieldNames(validTickets);
+        final var tickets = puzzleInput.nearbyTickets();
+        final var validator = new TicketValidator(puzzleInput.ticketFieldValidators());
+        final var validTickets = validator.validTickets(tickets);
+        final var fieldNames = validator.fieldNames(validTickets);
 
-        final Ticket myTicket = puzzleInput.myTicket();
+        final var myTicket = puzzleInput.myTicket();
         final long departure = IntStream.range(0, fieldNames.size())
                 .filter(idx -> fieldNames.get(idx).startsWith("departure"))
                 .mapToLong(myTicket::field)

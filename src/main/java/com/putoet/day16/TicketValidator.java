@@ -7,45 +7,45 @@ import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class TicketValidator implements Validator<Ticket> {
+class TicketValidator implements Validator<Ticket> {
     private final List<TicketFieldValidator> validators;
 
-    public TicketValidator(List<TicketFieldValidator> validators) {
+    public TicketValidator(@NotNull List<TicketFieldValidator> validators) {
         this.validators = validators;
     }
 
     @Override
     public boolean isValid(@NotNull Ticket toValidate) {
         return toValidate.fields().stream()
-                    .allMatch(field -> validators.stream().anyMatch(validator -> validator.isValid(field)));
+                .allMatch(field -> validators.stream().anyMatch(validator -> validator.isValid(field)));
     }
 
-    public List<Ticket> validTickets(List<Ticket> tickets) {
+    public List<Ticket> validTickets(@NotNull List<Ticket> tickets) {
         return tickets.stream()
                 .filter(this::isValid)
-                .collect(Collectors.toList());
+                .toList();
     }
 
-    public List<String> fieldNames(List<Ticket> tickets) {
-        final Set<String> fields = validators.stream().map(TicketFieldValidator::fieldName).collect(Collectors.toSet());
-        final Map<String, TicketFieldValidator> map = validators.stream()
+    public List<String> fieldNames(@NotNull List<Ticket> tickets) {
+        final var fields = validators.stream()
+                .map(TicketFieldValidator::fieldName)
+                .collect(Collectors.toSet());
+        final var map = validators.stream()
                 .collect(Collectors.toMap(TicketFieldValidator::fieldName, validator -> validator));
 
-        final Set<String>[] possibleFieldNames = (Set<String>[]) Array.newInstance(HashSet.class, fields.size());
-        for (String fieldName : fields) {
-            final TicketFieldValidator validator = map.get(fieldName);
-
-            for (int idx = 0; idx < fields.size(); idx++) {
-                int finalIdx = idx;
+        @SuppressWarnings("unchecked") final Set<String>[] possibleFieldNames = (Set<String>[]) Array.newInstance(HashSet.class, fields.size());
+        for (var fieldName : fields) {
+            final var validator = map.get(fieldName);
+            for (var idx = 0; idx < fields.size(); idx++) {
+                final var finalIdx = idx;
                 if (tickets.stream().map(ticket -> ticket.field(finalIdx)).allMatch(validator::isValid)) {
-                    if (possibleFieldNames[idx] == null)
-                        possibleFieldNames[idx] = new HashSet<>();
+                    if (possibleFieldNames[idx] == null) possibleFieldNames[idx] = new HashSet<>();
                     possibleFieldNames[idx].add(fieldName);
                 }
             }
         }
 
-        final Set<String> single = new HashSet<>();
+        final var single = new HashSet<String>();
         while (single.size() != fields.size()) {
             for (Set<String> possibleFieldName : possibleFieldNames) {
                 if (possibleFieldName.size() == 1)
@@ -55,6 +55,6 @@ public class TicketValidator implements Validator<Ticket> {
             }
         }
 
-        return Arrays.stream(possibleFieldNames).flatMap(Collection::stream).collect(Collectors.toList());
+        return Arrays.stream(possibleFieldNames).flatMap(Collection::stream).toList();
     }
 }

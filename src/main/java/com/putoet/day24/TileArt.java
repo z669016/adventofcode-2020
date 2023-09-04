@@ -1,21 +1,22 @@
 package com.putoet.day24;
 
 import com.putoet.grid.Point;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class TileArt {
-    private Map<Point, Tile> tiles;
+class TileArt {
+    private final Map<Point, Tile> tiles;
 
-    public TileArt(Collection<Tile> tiles) {
-        assert tiles != null && tiles.size() > 0;
+    public TileArt(@NotNull Collection<Tile> tiles) {
+        assert !tiles.isEmpty();
 
         this.tiles = tiles.stream().collect(Collectors.toMap(Tile::point, Tile::new));
-        for (Tile tile : tiles) {
+        for (var tile : tiles) {
             if (tile.color() == Tile.Color.BLACK) {
-                for (HexagonalDirection direction : HexagonalDirection.directions()) {
-                    final Point point = tile.point().add(direction.move());
+                for (var direction : HexagonalDirection.directions()) {
+                    final var point = tile.point().add(direction.move());
                     if (!this.tiles.containsKey(point)) {
                         this.tiles.put(point, new Tile(point));
                     }
@@ -25,7 +26,7 @@ public class TileArt {
     }
 
     public TileArt next() {
-        final TileArt nextTileArt = new TileArt(tiles.values());
+        final var nextTileArt = new TileArt(tiles.values());
         nextTileArt.evolve(tiles);
 
         return nextTileArt;
@@ -36,8 +37,8 @@ public class TileArt {
     }
 
     private void evolve(Map<Point, Tile> tilesToEvolve) {
-        for (Tile tile : tilesToEvolve.values()) {
-            final int blackNeighbours = blackNeighbourCount(tile, tilesToEvolve);
+        for (var tile : tilesToEvolve.values()) {
+            final var blackNeighbours = blackNeighbourCount(tile, tilesToEvolve);
 
             if (tile.color() == Tile.Color.BLACK) {
                 if (blackNeighbours == 0 || blackNeighbours > 2)
@@ -50,11 +51,11 @@ public class TileArt {
     }
 
     private int blackNeighbourCount(Tile tile, Map<Point, Tile> tiles) {
-        int blackNeighbourCount = 0;
+        var blackNeighbourCount = 0;
 
-        for (HexagonalDirection direction : HexagonalDirection.directions()) {
-            final Point point = tile.point().add(direction.move());
-            Tile neighbour = tiles.get(point);
+        for (var direction : HexagonalDirection.directions()) {
+            final var point = tile.point().add(direction.move());
+            var neighbour = tiles.get(point);
             if (neighbour == null) {
                 neighbour = new Tile(point);
                 this.tiles.put(point, neighbour);

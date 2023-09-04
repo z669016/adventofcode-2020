@@ -1,11 +1,12 @@
 package com.putoet.day24;
 
 import com.putoet.grid.Point;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 import java.util.List;
 
-public enum HexagonalDirection {
+enum HexagonalDirection {
     EAST(Point.of(2, 0)),
     SOUTH_EAST(Point.of(1, -1)),
     SOUTH_WEST(Point.of(-1, -1)),
@@ -15,13 +16,13 @@ public enum HexagonalDirection {
 
     private final Point move;
 
-    HexagonalDirection(Point move) {
+    HexagonalDirection(@NotNull Point move) {
         this.move = move;
     }
 
     public Point move() { return move; }
 
-    public static Iterator<HexagonalDirection> iteratorOf(String route) {
+    public static Iterator<HexagonalDirection> iteratorOf(@NotNull String route) {
         return new Iterator<>() {
             private int offset = 0;
 
@@ -32,7 +33,7 @@ public enum HexagonalDirection {
 
             @Override
             public HexagonalDirection next() {
-                String direction = String.valueOf(route.charAt(offset++));
+                var direction = String.valueOf(route.charAt(offset++));
                 if (direction.equals("s") || direction.equals("n")) {
                     if (offset == route.length())
                         throw new IllegalArgumentException("Invalid route '" + route + "'");

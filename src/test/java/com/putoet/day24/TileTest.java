@@ -9,7 +9,7 @@ class TileTest {
 
     @Test
     void visit() {
-        final Tile tile = new Tile(Point.ORIGIN);
+        final var tile = new Tile(Point.ORIGIN);
 
         assertEquals(Tile.Color.WHITE, tile.color());
         tile.flip();

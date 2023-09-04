@@ -3,15 +3,13 @@ package com.putoet.day24;
 import com.putoet.resources.ResourceLines;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TileVisitorTest {
 
     @Test
     void visit() {
-        final TileVisitor visitor = new TileVisitor();
+        final var visitor = new TileVisitor();
 
         visitor.visit("nwwswee");
         assertEquals(1, visitor.blackCount());

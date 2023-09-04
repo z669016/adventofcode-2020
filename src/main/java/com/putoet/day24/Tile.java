@@ -1,20 +1,23 @@
 package com.putoet.day24;
 
 import com.putoet.grid.Point;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-public class Tile {
+class Tile {
     public enum Color {
         WHITE, BLACK
-    };
+    }
+
     private final Point point;
     private int flipped;
 
-    public Tile(Point point) {
+    public Tile(@NotNull Point point) {
         this.point = point;
     }
-    public Tile(Tile tile) {
+
+    public Tile(@NotNull Tile tile) {
         this.point = tile.point;
         this.flipped = tile.flipped;
     }
@@ -29,14 +32,13 @@ public class Tile {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Tile)) return false;
-        Tile tile = (Tile) o;
-        return point.equals(tile.point);
+        if (!(o instanceof Tile tile)) return false;
+        return flipped == tile.flipped && Objects.equals(point, tile.point);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(point);
+        return Objects.hash(point, flipped);
     }
 
     @Override

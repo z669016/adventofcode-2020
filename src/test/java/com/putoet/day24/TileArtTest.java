@@ -9,12 +9,12 @@ class TileArtTest {
 
     @Test
     void next() {
-        final TileVisitor visitor = new TileVisitor();
+        final var visitor = new TileVisitor();
         visitor.visit(ResourceLines.list("/day24.txt"));
 
-        TileArt tileArt = new TileArt(visitor.tiles());
+        var tileArt = new TileArt(visitor.tiles());
         assertEquals(10, tileArt.blackCount());
-        for (int i = 0; i < 100; i++){
+        for (var i = 0; i < 100; i++){
             tileArt = tileArt.next();
 
             if (i == 0) assertEquals(15, tileArt.blackCount());

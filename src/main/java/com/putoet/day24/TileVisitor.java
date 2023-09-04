@@ -1,27 +1,28 @@
 package com.putoet.day24;
 
 import com.putoet.grid.Point;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-public class TileVisitor {
+class TileVisitor {
     private final Map<Point, Tile> tiles = new HashMap<>();
 
     public TileVisitor() {
         tiles.put(Point.ORIGIN, new Tile(Point.ORIGIN));
     }
 
-    public void visit(List<String> routes) {
+    public void visit(@NotNull List<String> routes) {
         routes.forEach(this::visit);
     }
 
-    public void visit(String route) {
-        final Iterator<HexagonalDirection> iter = HexagonalDirection.iteratorOf(route);
-        Point point = Point.ORIGIN;
+    public void visit(@NotNull String route) {
+        final var iter = HexagonalDirection.iteratorOf(route);
+        var point = Point.ORIGIN;
 
         Tile tile = null;
         while (iter.hasNext()) {
-            final HexagonalDirection direction = iter.next();
+            final var direction = iter.next();
             point = point.add(direction.move());
 
             tile = tiles.get(point);
@@ -31,7 +32,7 @@ public class TileVisitor {
             }
         }
 
-        tile.flip();
+        Objects.requireNonNull(tile).flip();
     }
 
     public int size() {
@@ -40,10 +41,6 @@ public class TileVisitor {
 
     public Collection<Tile> tiles() {
         return tiles.values();
-    }
-
-    public long whiteCount() {
-        return tiles.values().stream().filter(tile -> tile.color() == Tile.Color.WHITE).count();
     }
 
     public long blackCount() {

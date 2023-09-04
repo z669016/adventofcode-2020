@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * The Puzzler class is a helper to solve the puzzle. It finds the
  * corner tiles, and can put all tiles in a valid position.
  */
-public class Puzzler {
+class Puzzler {
     public static final char[][] SEA_MONSTER = GridUtils.of(List.of(
             "                  # ",
             "#    ##    ##    ###",

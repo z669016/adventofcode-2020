@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Rules {
+class Rules {
     private final Map<Integer, Rule> rules = new HashMap<>();
 
     private Rules() {

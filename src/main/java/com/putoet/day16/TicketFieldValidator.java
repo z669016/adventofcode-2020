@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 record TicketFieldValidator(@NotNull String fieldName, @NotNull List<Pair<Integer,Integer>> ranges)
         implements Validator<Integer> {
 
-    public static Pattern TICKET_FIELD_VALIDATOR = Pattern.compile("([a-z ]+): (\\d+)-(\\d+) or (\\d+)-(\\d+)");
+    public static final Pattern TICKET_FIELD_VALIDATOR = Pattern.compile("([a-z ]+): (\\d+)-(\\d+) or (\\d+)-(\\d+)");
     public static TicketFieldValidator of(int lineNumber, @NotNull String line) {
         final var matcher = TICKET_FIELD_VALIDATOR.matcher(line);
         if (!matcher.matches())

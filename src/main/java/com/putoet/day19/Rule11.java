@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Set;
 
-public class Rule11 extends ChoiceRule {
+class Rule11 extends ChoiceRule {
     private final Rules rules;
     private Rule rule11;
     private int rule11Length;
